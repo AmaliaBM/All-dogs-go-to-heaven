@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es"> <!-- Corregido idioma a español -->
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All dogs go to heaven</title>
+  <link rel="stylesheet" href="./styles/style.css" />
+</head>
+<body>
+
+  <!-- PANTALLA DE INICIO -->
+  <div id="splash-screen" class="container">
+    <img src="./images-fondojuego-titulo/titulo-juego.png" width="500" alt="Logo del juego: All dogs go to heaven" />
+    <button id="start-btn">Play!</button>
+  </div>
+  
+  <!-- PANTALLA DE JUEGO -->
+  <div id="game-screen" class="container" style="display: none;">
+    <div id="score-board">Puntos: <span id="score">0</span></div>
+    <!-- Elementos del juego como puntuación, vidas, etc. deberían ir aquí (dentro del game-screen pero fuera del game-box) -->
+    <div id="game-box">
+      <!-- Los elementos del juego serán añadidos desde JS con manipulación de DOM -->
+    </div>
+  </div>
+  
+  <!-- PANTALLA FINAL -->
+  <div id="game-over-screen" class="container" style="display: none;">
+    <img src="./images-fondojuego-titulo/Lo-has-hecho-bastante-bien.png" width="500" alt="Pantalla final: lo has hecho bien" />
+    <button id="restart-btn">Volver a jugar</button>
+  </div>
+
+  <!-- JS: cargar primero main para que controle el flujo general -->
+  <script src="./js/main.js"></script>
+  <script src="./js/nubes.js"></script>
+  <script src="./js/pollitoasado.js"></script>
+  <script src="./js/london.js"></script>
+
+</body>
+</html>
