@@ -17,12 +17,29 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
     const gameBoxNode = document.querySelector("#game-box");
 
     // musica--> suena música cuando comienza juego
-    const musicaJuegoNode = document.querySelector("audio");
-
-    //>>>>PARAR MUSICA. 
+    const musicaJuegoNode = document.querySelector("#musicajuego");
+    musicaJuegoNode.volume = 0.1; //volumen de la musica general del juego, para q suenen + los efectos
+    // Bucle Musica general ---> para que no deje de sonar aunque lleves mucho tiempo jugando
+    musicaJuegoNode.addEventListener('ended', function() {
+      this.currentTime = 0;
+      this.play();
+  }, false);
+    
+    //>>>>PARAR MUSICA. -->
     const stopMusic = () => {
         musicaJuegoNode.pause(); 
     };
+
+
+    // sonido efecto colisión --> suena cuando hay colisión con nubes
+    const musicaColisionNode = document.querySelector("#musicacolision");
+    musicaColisionNode.volume = 0.5;
+
+    //sonido cuando coge pollo --> suena cuando recoge pollo
+    const sonidoPolloNode = document.querySelector("#sonidocomerpollo")
+    sonidoPolloNode.volume = 0.5;
+
+   
    
     //* VARIABLES GLOBALES DEL JUEGO
   
@@ -49,7 +66,7 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
       musicaJuegoNode.play();
     });
     
-    soundOffBtnDOM.addEventListener("click", stopMusic);
+    soundOffBtnDOM.addEventListener("click", stopMusic) 
   
     // Movimiento con teclado
     document.addEventListener("keydown", (event) => {
@@ -62,6 +79,7 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
       } else if (event.key === " ") {
         londonObj.jump(); // puedes asignar espacio al salto
       }
+      event.stopPropagation(); //para que musica no se sube y baje usando los comandos de flechas
     });
   
     function startGame() {
@@ -124,8 +142,8 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
       });
   
       // comprobar colisiones
-      checkCollisionLondonNubes();
-      checkCollisionLondonPollitos();
+      checkCollisionLondonNubes(musicaJuegoNode, musicaColisionNode);
+      checkCollisionLondonPollitos(sonidoPolloNode);
     }
   
     function endGame() { //funcion finalizar juego
@@ -147,7 +165,7 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
       //>>>>>Proyecto final se basa en esto, pero precisamente en este PUNTO se tiene que cambiar.
     }
   
-    function checkCollisionLondonPollitos() {
+    function checkCollisionLondonPollitos(sonidoPolloNode) {
       pollitosArr.forEach((pollito, index) => {
         if (
           londonObj.x < pollito.x + pollito.width &&
@@ -156,6 +174,7 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
           londonObj.y + londonObj.h > pollito.y
         ) {
           // ¡Colisión = recogido!
+          sonidoPolloNode.play();
           pollito.remove();
           pollitosArr.splice(index, 1);
           score += 1;
@@ -166,7 +185,7 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
       });
     }
   
-    function checkCollisionLondonNubes() {
+    function checkCollisionLondonNubes(musicaJuegoNode, musicaColisionNode) {
       nubesArr.forEach((nube) => {
         if (
           londonObj.x < nube.x + nube.width &&
@@ -175,6 +194,8 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
           londonObj.y + londonObj.h > nube.y
         ) {
           // London ha chocado con la nube -> fin del juego
+          musicaJuegoNode.pause();
+          musicaColisionNode.play();
           endGame();
         }
       });

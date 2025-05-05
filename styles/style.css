@@ -3,6 +3,10 @@ body {
     background-color: rgb(255, 255, 255);
   }
 
+audio {
+    display: none; 
+  }
+
   .container {
     display: flex;
     flex-direction: column;
