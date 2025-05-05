@@ -10,13 +10,20 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
     // botones
     const startBtnNode = document.querySelector("#start-btn");
     const restartBtnNode = document.querySelector("#restart-btn");
+    const soundOnBtnDOM = document.querySelector("#soundOn-btn"); //btn sonido ON musica
+    const soundOffBtnDOM = document.querySelector("#soundOff-btn"); //btn sonido OFF musica
   
     // game box
     const gameBoxNode = document.querySelector("#game-box");
 
-    // musica
+    // musica--> suena música cuando comienza juego
     const musicaJuegoNode = document.querySelector("audio");
-  
+
+    //>>>>PARAR MUSICA. 
+    const stopMusic = () => {
+        musicaJuegoNode.pause(); 
+    };
+   
     //* VARIABLES GLOBALES DEL JUEGO
   
     let londonObj = null; //creo variable de acceso, no creo "london". No quiero q todavía exista. Es para que cualquier parte del código acceda a ella.
@@ -37,6 +44,12 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
     restartBtnNode.addEventListener("click", () => {
       location.reload(); // Recarga todo el juego
     });
+
+    soundOnBtnDOM.addEventListener("click", () => {
+      musicaJuegoNode.play();
+    });
+    
+    soundOffBtnDOM.addEventListener("click", stopMusic);
   
     // Movimiento con teclado
     document.addEventListener("keydown", (event) => {
@@ -60,10 +73,13 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
   
       //2. mostrar la pantalla de juego
       gameScreenNode.style.display = "flex";
+
      //!--->aqui añadiría la musica, llamando al nodo juego musica y método .play, Ocultarlo y generar un botón que clicka el usuario y se accede al nodo, metodo pausa. 
 
-     
-  
+     //2.1 meter música del juego
+     musicaJuegoNode.play();
+     musicaJuegoNode.pause();
+    
       //3. Añadimos elementos iniciales del juego
       londonObj = new London(gameBoxNode); //antes era "const", pero lo quitamos para que acceda a la variable global
   

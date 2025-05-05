@@ -17,12 +17,26 @@
   
   <!-- PANTALLA DE JUEGO -->
   <div id="game-screen" class="container" style="display: none;">
-    <div id="score-board">Puntos: <span id="score">0</span></div>
     <!-- Elementos del juego como puntuación, vidas, etc. deberían ir aquí (dentro del game-screen pero fuera del game-box) -->
     <div id="game-box">
+      <div id="score-board"> <h3>Score</h3>: <span id="score" style="display: flex;">0</span></div>
       <!-- Los elementos del juego serán añadidos desde JS con manipulación de DOM -->
     </div>
   </div>
+
+  <!-- SONIDOS EXTRAS?-->
+
+  <div id="botonesOnOff">
+  <button id="soundOn-btn">
+    <img src="(hacer imagen para sound ON)" width="35">
+  </button>
+
+  <button id="soundOff-btn">
+    <img src="(hacer imagen para sound OFF)" width="35">
+  </button>
+  </div>
+
+
   
   <!-- PANTALLA FINAL -->
   <div id="game-over-screen" class="container" style="display: none;">
@@ -30,7 +44,7 @@
     <button id="restart-btn">Volver a jugar</button>
   </div>
 
- <!-- AÑADIR MUSICA -->
+ <!-- AÑADIR MUSICA A TODO EL JUEGO -->
     <figure>
     <figcaption>Musica:</figcaption>
     <audio controls src="./sonido-musica/moodmode_-_8_Bit_Retro_Game_Music.mp3"></audio>  
