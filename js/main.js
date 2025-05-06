@@ -1,34 +1,27 @@
-window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecute una vez que HTML este completamente cargado
-  //* ELEMENTOS PRINCIPALES DEL DOM
-
-  // pantallas
+window.addEventListener("DOMContentLoaded", () => {
+  //* ELEMENTOS DEL DOM
   const splashScreenNode = document.querySelector("#splash-screen");
   const gameScreenNode = document.querySelector("#game-screen");
   const gameOverScreenNode = document.querySelector("#game-over-screen");
   const scoreNode = document.querySelector("#score");
   const maxScoreNode = document.querySelector("#max-score");
+  const scoreGameOverNode = document.querySelector("#score-gameover");
   const maxScoreGameOverNode = document.querySelector("#max-score-gameover");
 
-  // botones
+  const playerNameInput = document.querySelector("#player-name-input");
   const startBtnNode = document.querySelector("#start-btn");
   const restartBtnNode = document.querySelector("#restart-btn");
-  const soundOnBtnDOM = document.querySelector("#soundOn-btn"); //btn sonido ON musica
-  const soundOffBtnDOM = document.querySelector("#soundOff-btn"); //btn sonido OFF musica
-
-  // game box
+  const soundOnBtnDOM = document.querySelector("#soundOn-btn");
+  const soundOffBtnDOM = document.querySelector("#soundOff-btn");
   const gameBoxNode = document.querySelector("#game-box");
 
-  // musica--> suena música cuando comienza juego
+  //* SONIDOS
   const musicaJuegoNode = document.querySelector("#musicajuego");
   musicaJuegoNode.volume = 0.1;
-  musicaJuegoNode.addEventListener('ended', function () {
+  musicaJuegoNode.addEventListener("ended", function () {
     this.currentTime = 0;
     this.play();
-  }, false);
-
-  const stopMusic = () => {
-    musicaJuegoNode.pause();
-  };
+  });
 
   const musicaColisionNode = document.querySelector("#musicacolision");
   musicaColisionNode.volume = 0.5;
@@ -39,11 +32,16 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
   const sonidoManzanaNode = document.querySelector("#sonidocomerpollo");
   sonidoManzanaNode.volume = 0.5;
 
-  //* VARIABLES GLOBALES DEL JUEGO
+  const stopMusic = () => musicaJuegoNode.pause();
+
+  //* VARIABLES DE JUEGO
   let londonObj = null;
   let pollitosArr = [];
   let manzanasArr = [];
   let nubesArr = [];
+
+  let playerName = "";
+  let maxScore = 0;
   let score = 0;
 
   let gameIntervalId = null;
@@ -51,9 +49,27 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
   let pollitosIntervalId = null;
   let manzanasIntervalId = null;
 
-  //* FUNCIONES GLOBALES DEL JUEGO
+  //* CARGAR PUNTUACIÓN MÁXIMA DE LOCALSTORAGE
+  const savedData = JSON.parse(localStorage.getItem("maxScores")) || [];
+  if (savedData.length > 0) {
+    const highestScore = savedData.reduce((max, player) => player.score > max ? player.score : max, 0);
+    const bestPlayer = savedData.find(player => player.score === highestScore);
+    maxScore = highestScore;
+    playerName = bestPlayer.name;
+    maxScoreNode.innerText = `Max Score: ${maxScore} (${playerName})`;
+  }
 
+  //* EVENTOS
   startBtnNode.addEventListener("click", () => {
+    if (playerNameInput.value.trim() === "") {
+      alert("Por favor, ingresa tu nombre.");
+      return;
+    }
+    playerName = playerNameInput.value.trim();
+
+    splashScreenNode.style.display = "none";
+    gameScreenNode.style.display = "flex";
+
     startGame();
   });
 
@@ -82,30 +98,22 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
     }
     event.stopPropagation();
   });
-  
-  let maxScore = localStorage.getItem("maxScore") || 0;
-  maxScore = Number(maxScore); // Asegura que sea número
-  maxScoreNode.innerText = `Max Score: ${maxScore}`;
 
-
+  //* FUNCIONES
   function startGame() {
     score = 0;
     scoreNode.innerText = score;
 
-    splashScreenNode.style.display = "none";
-    gameScreenNode.style.display = "flex";
-
     musicaJuegoNode.play();
-    musicaJuegoNode.pause();
 
     londonObj = new London(gameBoxNode);
 
-    gameIntervalId = setInterval(() => {
-      gameLoop();
-    }, Math.round(1000 / 60));
+    gameIntervalId = setInterval(gameLoop, 1000 / 60);
 
     nubesIntervalId = setInterval(() => {
-      nubesAppear();
+      const randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 100));
+      const nuevaNube = new Nube(gameBoxNode, randomY);
+      nubesArr.push(nuevaNube);
     }, 2000);
 
     pollitosIntervalId = setInterval(() => {
@@ -118,59 +126,32 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
       const randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 100)) + 10;
       const nuevoManzana = new Manzana(gameBoxNode, randomY);
       manzanasArr.push(nuevoManzana);
-    }, 3700); // desfasar un poco el tiempo    
+    }, 3700);
   }
 
   function gameLoop() {
     if (!londonObj) return;
 
-    nubesArr.forEach((cadaNubeObj, index) => {
-      cadaNubeObj.automaticMovement();
-      if (cadaNubeObj.x + cadaNubeObj.width < 0) {
-        cadaNubeObj.remove();
-        nubesArr.splice(index, 1);
-      }
-    });
+    moveAndClean(nubesArr);
+    moveAndClean(pollitosArr);
+    moveAndClean(manzanasArr);
 
-    pollitosArr.forEach((pollito, index) => {
-      pollito.automaticMovement();
-      if (pollito.x + pollito.width < 0) {
-        pollito.remove();
-        pollitosArr.splice(index, 1);
-      }
-    });
-
-    manzanasArr.forEach((manzana, index) => {
-      manzana.automaticMovement();
-      if (manzana.x + manzana.width < 0) {
-        manzana.remove();
-        manzanasArr.splice(index, 1);
-      }
-    });
-
-    checkCollisionLondonNubes(musicaJuegoNode, musicaColisionNode);
-    checkCollisionLondonPollitos(sonidoPolloNode);
-    checkCollisionLondonManzana(sonidoPolloNode);
+    checkCollisionLondonNubes();
+    checkCollisionLondonPollitos();
+    checkCollisionLondonManzana();
   }
 
-  function endGame() {
-    clearInterval(gameIntervalId);
-    clearInterval(nubesIntervalId);
-    clearInterval(pollitosIntervalId);
-    clearInterval(manzanasIntervalId);
-
-    gameScreenNode.style.display = "none";
-    maxScoreGameOverNode.innerText = `Max Score: ${maxScore}`;
-    gameOverScreenNode.style.display = "flex";
+  function moveAndClean(arr) {
+    arr.forEach((obj, index) => {
+      obj.automaticMovement();
+      if (obj.x + obj.width < 0) {
+        obj.remove();
+        arr.splice(index, 1);
+      }
+    });
   }
 
-  function nubesAppear() {
-    let randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 100));
-    let nuevaNube = new Nube(gameBoxNode, randomY);
-    nubesArr.push(nuevaNube);
-  }
-
-  function checkCollisionLondonNubes(musicaJuegoNode, musicaColisionNode) {
+  function checkCollisionLondonNubes() {
     nubesArr.forEach((nube) => {
       if (
         londonObj.x < nube.x + nube.width &&
@@ -185,7 +166,7 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
     });
   }
 
-  function checkCollisionLondonPollitos(sonidoPolloNode) {
+  function checkCollisionLondonPollitos() {
     pollitosArr.forEach((pollito, index) => {
       if (
         londonObj.x < pollito.x + pollito.width &&
@@ -196,18 +177,12 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
         sonidoPolloNode.play();
         pollito.remove();
         pollitosArr.splice(index, 1);
-        score += 1;
-        scoreNode.innerText = score;
-      }
-      if (score > maxScore) {
-        maxScore = score;
-        localStorage.setItem("maxScore", maxScore);
-        maxScoreNode.innerText = `Max Score: ${maxScore}`;
+        updateScore(1);
       }
     });
   }
 
-  function checkCollisionLondonManzana(sonidoPolloNode) {
+  function checkCollisionLondonManzana() {
     manzanasArr.forEach((manzana, index) => {
       if (
         londonObj.x < manzana.x + manzana.width &&
@@ -218,15 +193,34 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
         sonidoPolloNode.play();
         manzana.remove();
         manzanasArr.splice(index, 1);
-        score += 2;
-        scoreNode.innerText = score;
-      }
-      if (score > maxScore) {
-        maxScore = score;
-        localStorage.setItem("maxScore", maxScore);
-        maxScoreNode.innerText = `Max Score: ${maxScore}`;
+        updateScore(2);
       }
     });
   }
 
+  function updateScore(points) {
+    score += points;
+    scoreNode.innerText = score;
+
+    if (score > maxScore) {
+      maxScore = score;
+      maxScoreNode.innerText = `Max Score: ${maxScore} (${playerName})`;
+
+      const maxScores = JSON.parse(localStorage.getItem("maxScores")) || [];
+      maxScores.push({ name: playerName, score: maxScore });
+      localStorage.setItem("maxScores", JSON.stringify(maxScores));
+    }
+  }
+
+  function endGame() {
+    clearInterval(gameIntervalId);
+    clearInterval(nubesIntervalId);
+    clearInterval(pollitosIntervalId);
+    clearInterval(manzanasIntervalId);
+
+    gameScreenNode.style.display = "none";
+    scoreGameOverNode.innerText = `Puntuación Final: ${score}`;
+    maxScoreGameOverNode.innerText = `Max Score: ${maxScore}`;
+    gameOverScreenNode.style.display = "flex";
+  }
 });

@@ -28,6 +28,8 @@
   <!-- PANTALLA DE INICIO -->
   <div id="splash-screen" class="container">
     <img src="./images-fondojuego-titulo/titulo-juego.png" width="500" alt="Logo del juego: All dogs go to heaven" />
+    <p>Introduce tu nombre para empezar</p>
+    <input type="text" id="player-name-input" placeholder="Ingresa tu nombre" />
     <button id="start-btn">Play!</button>
   </div>
   
@@ -41,6 +43,7 @@
   
   <!-- PANTALLA FINAL -->
   <div id="game-over-screen" class="container" style="display: none;">
+    <p>Puntuación Final: <span id="score-gameover">0</span></p>
     <p id="max-score-gameover">Max Score: 0</p>
     <img src="./images-fondojuego-titulo/Lo-has-hecho-bastante-bien.png" width="500" alt="Pantalla final: lo has hecho bien" />
     <button id="restart-btn">Volver a jugar</button>
