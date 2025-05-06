@@ -37,9 +37,6 @@ class London {
         this.node.style.position = "absolute"; //poder posicionarlo de forma exacta
         this.node.style.top = `${this.y}px`; //define su posicion en eje Y
         this.node.style.left = `${this.x}px`; //define su posicion en eje X
-
-        //!this.gravitySpeed = 2; //esto ocurrirá 1 vez x 60s[al final no implementé esta acción]
-        //!this.jumpSpeed = 40; //cuando usuario clique sobre pantalla ocurrirá esto[esta tampoco la implementé finalmente]
         this.movementSpeed = 15; 
         
     }

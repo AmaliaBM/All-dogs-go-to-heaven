@@ -69,10 +69,13 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
     if (!londonObj) return;
 
     if (event.key === "ArrowUp") {
+      event.preventDefault();
       londonObj.moveUp();
     } else if (event.key === "ArrowDown") {
+      event.preventDefault();
       londonObj.moveDown();
     } else if (event.key === " ") {
+      event.preventDefault();
       londonObj.jump();
     }
     event.stopPropagation();
