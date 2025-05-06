@@ -234,11 +234,13 @@ window.addEventListener("DOMContentLoaded", () => {
     mostrarRanking();
 
     gameScreenNode.style.display = "none";
+    gameBoxNode.style.display = "none";
+    gameOverScreenNode.style.display = "flex"
     scoreGameOverNode.innerText = `Puntuación Final: ${score}`;
     maxScoreGameOverNode.innerText = `Max Score: ${maxScore}`;
     document.querySelector("#player-name-gameover").innerText = `Jugador: ${playerName}`;
     
-    gameOverScreenNode.style.display = "flex";
+    ;
   }
 
 });
