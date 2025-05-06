@@ -40,12 +40,15 @@
       <!-- Los elementos del juego serán añadidos desde JS con manipulación de DOM -->
     </div>
   </div>  
-  
-  <!-- PANTALLA FINAL -->
+
+   <!--PANTALLA FINAL -->
   <div id="game-over-screen" class="container" style="display: none;">
-    <p>Puntuación Final: <span id="score-gameover">0</span></p>
-    <p id="max-score-gameover">Max Score: 0</p>
+    <p id="player-name-gameover"></p>
+    <p id="score-gameover"></p>
+    <p id="max-score-gameover"></p>
     <img src="./images-fondojuego-titulo/Lo-has-hecho-bastante-bien.png" width="500" alt="Pantalla final: lo has hecho bien" />
+    <h3>🏆 Ranking de Mejores Jugadores</h3>
+    <ol id="ranking-list"></ol>
     <button id="restart-btn">Volver a jugar</button>
   </div>
 

@@ -212,15 +212,33 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function mostrarRanking() {
+    const rankingList = document.querySelector("#ranking-list");
+    rankingList.innerHTML = "";
+    let maxScores = JSON.parse(localStorage.getItem("maxScores")) || [];
+    maxScores.sort((a, b) => b.score - a.score);
+    const topPlayers = maxScores.slice(0, 5);
+
+    topPlayers.forEach((player, index) => {
+      const li = document.createElement("li");
+      li.innerText = `${player.name}: ${player.score} puntos`;
+      rankingList.appendChild(li);
+    });
+  }
+
   function endGame() {
     clearInterval(gameIntervalId);
     clearInterval(nubesIntervalId);
     clearInterval(pollitosIntervalId);
     clearInterval(manzanasIntervalId);
+    mostrarRanking();
 
     gameScreenNode.style.display = "none";
     scoreGameOverNode.innerText = `Puntuación Final: ${score}`;
     maxScoreGameOverNode.innerText = `Max Score: ${maxScore}`;
+    document.querySelector("#player-name-gameover").innerText = `Jugador: ${playerName}`;
+    
     gameOverScreenNode.style.display = "flex";
   }
+
 });
