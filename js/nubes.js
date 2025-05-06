@@ -1,52 +1,52 @@
 class Nube {
-
-    /*Las nubes deben:
-
-    Entrar por la derecha y moverse a la izquierda (como los pollitos).
-
-    No interferir con la lógica ni la frecuencia de aparición de los pollitos.
-
-    Crear colisión con el personaje principal, si colisionan personaje principal (London) y nubes, entonces se pierde el juego.
-
-    Tener su propio control de aparición y destrucción, separado del de los pollitos.*/
-
+    /*
+      Clase Nube:
+      - Entra por la derecha y se mueve hacia la izquierda.
+      - No interfiere con la lógica ni frecuencia de los pollitos.
+      - Colisiona con el personaje principal (London), lo que provoca el fin del juego.
+      - Tiene control de aparición y eliminación independiente.
+    */
+  
     constructor(gameBoxNode, posY) {
-        // Crear imagen de la nube
-        this.node = document.createElement("img");
-        this.node.src = "./images-sin-fondo/nube-horizontal-8bits.png"; // ruta de imagen
-
-        // Añadirla al DOM dentro del gameBox
-        this.gameBoxNode = gameBoxNode;
-        this.gameBoxNode.append(this.node);
-
-        // Posiciones y dimensiones
-        this.x = this.gameBoxNode.offsetWidth; // entra desde la derecha del juego
-        this.y = posY;
-        this.width = 40;
-        this.height = 30;
-        this.speed = 3.5;
-
-        // Estilo del nodo en pantalla
-        this.node.style.width = `${this.width}px`;
-        this.node.style.height = `${this.height}px`;
-        this.node.style.position = "absolute";
-        this.node.style.left = `${this.x}px`;
-        this.node.style.top = `${this.y}px`;
+      // === REFERENCIA AL CONTENEDOR DEL JUEGO ===
+      this.gameBoxNode = gameBoxNode;
+  
+      // === CREACIÓN DEL NODO DOM ===
+      this.node = document.createElement("img");
+      this.node.src = "./images-sin-fondo/nube-horizontal-8bits.png";
+      this.node.style.position = "absolute";
+  
+      // === DIMENSIONES Y POSICIÓN INICIAL ===
+      this.width = 40;
+      this.height = 30;
+      this.x = this.gameBoxNode.offsetWidth;
+      this.y = posY;
+      this.speed = 3.5;
+  
+      // === APLICAR ESTILOS INICIALES ===
+      this.node.style.width = `${this.width}px`;
+      this.node.style.height = `${this.height}px`;
+      this.node.style.left = `${this.x}px`;
+      this.node.style.top = `${this.y}px`;
+  
+      // === AGREGAR AL DOM ===
+      this.gameBoxNode.append(this.node);
     }
-
-    // Método de movimiento automático
+  
+    // === MOVIMIENTO AUTOMÁTICO HACIA LA IZQUIERDA ===
     automaticMovement() {
-        this.x -= this.speed;
-        this.updatePosition();
+      this.x -= this.speed;
+      this.updatePosition();
     }
-
-    // Método para actualizar posición en pantalla
+  
+    // === ACTUALIZAR POSICIÓN EN PANTALLA ===
     updatePosition() {
-        this.node.style.left = `${this.x}px`;
+      this.node.style.left = `${this.x}px`;
     }
-
-    // Método para eliminar el nodo del DOM
+  
+    // === ELIMINAR DEL DOM ===
     remove() {
-        this.node.remove();
+      this.node.remove();
     }
-}
+  }
+  

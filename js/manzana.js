@@ -1,47 +1,48 @@
 class Manzana {
-
-    /*Las manzanas deben:
-
-    Entrar por la derecha y moverse a la izquierda (como las nubes).
-
-    No interferir con la lógica ni la frecuencia de aparición de las nubes, ni de pollitos.
-
-    Suman x2 los puntos.
-
-    Ser recolectables por el personaje principal (suman puntos).
-
-    Tener su propio control de aparición y destrucción, separado del de las nubes.*/
-
-        constructor(gameBoxNode, posY) {
-            this.node = document.createElement("img");
-            this.node.src = "./images-sin-fondo/manzana.png"; // imagen 
-
-            // Añadirla al DOM dentro del gameBox
-            this.gameBoxNode = gameBoxNode;
-            this.gameBoxNode.append(this.node);
-    
-            this.x = this.gameBoxNode.offsetWidth;
-            this.y = posY;
-            this.width = 20;
-            this.height = 20;
-            this.speed = 2;
-            this.node.style.zIndex = 10;
-    
-            // Aplicar estilo al DOM
-            this.node.style.position = "absolute";
-            this.node.style.width = `${this.width}px`;
-            this.node.style.height = `${this.height}px`;
-            this.node.style.left = `${this.x}px`;
-            this.node.style.top = `${this.y}px`;
-        }
-      //Añadir metodo de movimiento
-        automaticMovement() {
-            this.x -= this.speed;
-            this.node.style.left = `${this.x}px`;
-        }
-    
-        remove() {
-            this.node.remove();
-        }   
+    /*
+      Clase Manzana:
+      - Aparece desde la derecha y se desplaza hacia la izquierda.
+      - No interfiere con la lógica de nubes ni pollitos.
+      - Vale 2 puntos cuando es recolectada por el personaje principal.
+      - Tiene su propio control de aparición y eliminación.
+    */
   
-}
+    constructor(gameBoxNode, posY) {
+      // === REFERENCIA AL CONTENEDOR DEL JUEGO ===
+      this.gameBoxNode = gameBoxNode;
+  
+      // === CREACIÓN DEL NODO DOM ===
+      this.node = document.createElement("img");
+      this.node.src = "./images-sin-fondo/manzana.png";
+      this.node.style.zIndex = 10;
+      this.node.style.position = "absolute";
+  
+      // === DIMENSIONES Y POSICIÓN INICIAL ===
+      this.width = 20;
+      this.height = 20;
+      this.x = this.gameBoxNode.offsetWidth;
+      this.y = posY;
+      this.speed = 2;
+  
+      // === APLICAR ESTILOS INICIALES ===
+      this.node.style.width = `${this.width}px`;
+      this.node.style.height = `${this.height}px`;
+      this.node.style.left = `${this.x}px`;
+      this.node.style.top = `${this.y}px`;
+  
+      // === AGREGAR AL DOM ===
+      this.gameBoxNode.append(this.node);
+    }
+  
+    // === MOVIMIENTO AUTOMÁTICO HACIA LA IZQUIERDA ===
+    automaticMovement() {
+      this.x -= this.speed;
+      this.node.style.left = `${this.x}px`;
+    }
+  
+    // === ELIMINAR DEL DOM ===
+    remove() {
+      this.node.remove();
+    }
+  }
+  

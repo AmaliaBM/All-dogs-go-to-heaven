@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"> <!-- Corregido idioma a español-- metadatos --> 
+<html lang="es"> <!-- Idioma en español -->
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -7,22 +7,23 @@
   <title>All dogs go to heaven</title>
   <link rel="stylesheet" href="./styles/style.css" />
 </head>
-<body> 
+<body>
 
-   
-  <!---SCORE Recolector de puntos -->
-  <div id="score-board"><h3>Puntos</h3></div><span id="score" style="display: flex;">0</span>
-  <h3 id="max-score" style="display: flex;"><span></span></h3></div>
-      
-  <!--BOTONES ONOFF DE MUSICA JUEGO-->
- <div id="botonesOnOff">
-  <button id="soundOn-btn">
-    <img src="/images-sin-fondo/notas-musicales.png" width="35">
-  </button>
+  <!-- SCORE -->
+  <div id="score-board">
+    <h3>Puntos</h3>
+    <span id="score" style="display: flex;">0</span>
+    <h3 id="max-score" style="display: flex;"><span></span></h3>
+  </div>
 
-  <button id="soundOff-btn">
-    <img src="/images-sin-fondo/notas-musicales-tachadas.png" width="35">
-  </button>
+  <!-- BOTONES ON/OFF DE MÚSICA -->
+  <div id="botonesOnOff">
+    <button id="soundOn-btn">
+      <img src="/images-sin-fondo/notas-musicales.png" width="35" alt="Sonido activado" />
+    </button>
+    <button id="soundOff-btn">
+      <img src="/images-sin-fondo/notas-musicales-tachadas.png" width="35" alt="Sonido desactivado" />
+    </button>
   </div>
 
   <!-- PANTALLA DE INICIO -->
@@ -32,13 +33,13 @@
     <input type="text" id="player-name-input" placeholder="Ingresa tu nombre" />
     <button id="start-btn">Play!</button>
   </div>
-   <!-- PANTALLA DE JUEGO --> 
-  <div id="game-screen" class="container" style="display: none;">
-    <div id="game-box">
-    </div>
-  </div>  
 
-   <!--PANTALLA FINAL -->
+  <!-- PANTALLA DE JUEGO -->
+  <div id="game-screen" class="container" style="display: none;">
+    <div id="game-box"></div>
+  </div>
+
+  <!-- PANTALLA FINAL -->
   <div id="game-over-screen" class="container" style="display: none;">
     <p id="player-name-gameover"></p>
     <p id="score-gameover"></p>
@@ -49,23 +50,17 @@
     <button id="restart-btn">Volver a jugar</button>
   </div>
 
- <!-- AÑADIR MUSICA A TODO EL JUEGO -->
-    
-    <audio id="musicajuego" src="./sonido-musica/moodmode_-_8_Bit_Retro_Game_Music.mp3"></audio>
+  <!-- AUDIOS DEL JUEGO -->
+  <audio id="musicajuego" src="./sonido-musica/moodmode_-_8_Bit_Retro_Game_Music.mp3"></audio>
+  <audio id="musicacolision" src="./sonido-musica/negative_beeps-6008.mp3"></audio>
+  <audio id="sonidocomerpollo" src="./sonido-musica/eating-sound-effect-36186.mp3"></audio>
 
-    <audio id="musicacolision"  src="./sonido-musica/negative_beeps-6008.mp3"></audio>
-
-    <audio id="sonidocomerpollo" src="./sonido-musica/eating-sound-effect-36186.mp3"></audio>
-    
-
-
-  <!-- JS: cargar primero main para que controle el flujo general -->
+  <!-- SCRIPTS JS -->
   <script src="./js/main.js"></script>
   <script src="./js/nubes.js"></script>
   <script src="./js/pollitoasado.js"></script>
   <script src="./js/manzana.js"></script>
   <script src="./js/london.js"></script>
-  
 
-  </body>
+</body>
 </html>

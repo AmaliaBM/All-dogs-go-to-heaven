@@ -1,5 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
-  //* ELEMENTOS DEL DOM
+  // === ELEMENTOS DEL DOM ===
   const splashScreenNode = document.querySelector("#splash-screen");
   const gameScreenNode = document.querySelector("#game-screen");
   const gameOverScreenNode = document.querySelector("#game-over-screen");
@@ -7,7 +7,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const maxScoreNode = document.querySelector("#max-score");
   const scoreGameOverNode = document.querySelector("#score-gameover");
   const maxScoreGameOverNode = document.querySelector("#max-score-gameover");
-
   const playerNameInput = document.querySelector("#player-name-input");
   const startBtnNode = document.querySelector("#start-btn");
   const restartBtnNode = document.querySelector("#restart-btn");
@@ -15,26 +14,25 @@ window.addEventListener("DOMContentLoaded", () => {
   const soundOffBtnDOM = document.querySelector("#soundOff-btn");
   const gameBoxNode = document.querySelector("#game-box");
 
-  //* SONIDOS
+  // === SONIDOS ===
   const musicaJuegoNode = document.querySelector("#musicajuego");
+  const musicaColisionNode = document.querySelector("#musicacolision");
+  const sonidoPolloNode = document.querySelector("#sonidocomerpollo");
+  const sonidoManzanaNode = document.querySelector("#sonidocomerpollo"); // Usando el mismo audio
+
   musicaJuegoNode.volume = 0.1;
   musicaJuegoNode.addEventListener("ended", function () {
     this.currentTime = 0;
     this.play();
   });
 
-  const musicaColisionNode = document.querySelector("#musicacolision");
   musicaColisionNode.volume = 0.5;
-
-  const sonidoPolloNode = document.querySelector("#sonidocomerpollo");
   sonidoPolloNode.volume = 0.5;
-
-  const sonidoManzanaNode = document.querySelector("#sonidocomerpollo");
   sonidoManzanaNode.volume = 0.5;
 
   const stopMusic = () => musicaJuegoNode.pause();
 
-  //* VARIABLES DE JUEGO
+  // === VARIABLES DE JUEGO ===
   let londonObj = null;
   let pollitosArr = [];
   let manzanasArr = [];
@@ -49,7 +47,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let pollitosIntervalId = null;
   let manzanasIntervalId = null;
 
-  //* CARGAR PUNTUACIÓN MÁXIMA DE LOCALSTORAGE
+  // === CARGAR PUNTUACIÓN MÁXIMA ===
   const savedData = JSON.parse(localStorage.getItem("maxScores")) || [];
   if (savedData.length > 0) {
     const highestScore = savedData.reduce((max, player) => player.score > max ? player.score : max, 0);
@@ -59,29 +57,22 @@ window.addEventListener("DOMContentLoaded", () => {
     maxScoreNode.innerText = `Max Score: ${maxScore} (${playerName})`;
   }
 
-  //* EVENTOS
- startBtnNode.addEventListener("click", () => {
-  if (playerNameInput.value.trim() === "") {
-    alert("Por favor, ingresa tu nombre.");
-    return;
-  }
-  playerName = playerNameInput.value.trim();
-
-  splashScreenNode.style.display = "none";
-  gameScreenNode.style.display = "flex";
-  gameBoxNode.style.display = "block"; // <- AQUÍ
-
-  startGame();
-});
-
-  restartBtnNode.addEventListener("click", () => {
-    location.reload();
+  // === EVENTOS ===
+  startBtnNode.addEventListener("click", () => {
+    if (playerNameInput.value.trim() === "") {
+      alert("Por favor, ingresa tu nombre.");
+      return;
+    }
+    playerName = playerNameInput.value.trim();
+    splashScreenNode.style.display = "none";
+    gameScreenNode.style.display = "flex";
+    gameBoxNode.style.display = "block";
+    startGame();
   });
 
-  soundOnBtnDOM.addEventListener("click", () => {
-    musicaJuegoNode.play();
-  });
+  restartBtnNode.addEventListener("click", () => location.reload());
 
+  soundOnBtnDOM.addEventListener("click", () => musicaJuegoNode.play());
   soundOffBtnDOM.addEventListener("click", stopMusic);
 
   document.addEventListener("keydown", (event) => {
@@ -97,18 +88,17 @@ window.addEventListener("DOMContentLoaded", () => {
       event.preventDefault();
       londonObj.jump();
     }
+
     event.stopPropagation();
   });
 
-  //* FUNCIONES
+  // === INICIO DEL JUEGO ===
   function startGame() {
     score = 0;
     scoreNode.innerText = score;
-
     musicaJuegoNode.play();
 
     londonObj = new London(gameBoxNode);
-
     gameIntervalId = setInterval(gameLoop, 1000 / 60);
 
     nubesIntervalId = setInterval(() => {
@@ -130,6 +120,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 3700);
   }
 
+  // === BUCLE PRINCIPAL ===
   function gameLoop() {
     if (!londonObj) return;
 
@@ -152,6 +143,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // === COLISIONES ===
   function checkCollisionLondonNubes() {
     nubesArr.forEach((nube) => {
       if (
@@ -199,6 +191,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // === PUNTUACIÓN ===
   function updateScore(points) {
     score += points;
     scoreNode.innerText = score;
@@ -216,17 +209,18 @@ window.addEventListener("DOMContentLoaded", () => {
   function mostrarRanking() {
     const rankingList = document.querySelector("#ranking-list");
     rankingList.innerHTML = "";
-    let maxScores = JSON.parse(localStorage.getItem("maxScores")) || [];
-    maxScores.sort((a, b) => b.score - a.score);
-    const topPlayers = maxScores.slice(0, 5);
 
-    topPlayers.forEach((player, index) => {
+    const maxScores = JSON.parse(localStorage.getItem("maxScores")) || [];
+    const topPlayers = maxScores.sort((a, b) => b.score - a.score).slice(0, 5);
+
+    topPlayers.forEach((player) => {
       const li = document.createElement("li");
       li.innerText = `${player.name}: ${player.score} puntos`;
       rankingList.appendChild(li);
     });
   }
 
+  // === FINALIZAR JUEGO ===
   function endGame() {
     clearInterval(gameIntervalId);
     clearInterval(nubesIntervalId);
@@ -236,12 +230,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
     gameScreenNode.style.display = "none";
     gameBoxNode.style.display = "none";
-    gameOverScreenNode.style.display = "flex"
+    gameOverScreenNode.style.display = "flex";
+
     scoreGameOverNode.innerText = `Puntuación Final: ${score}`;
     maxScoreGameOverNode.innerText = `Max Score: ${maxScore}`;
     document.querySelector("#player-name-gameover").innerText = `Jugador: ${playerName}`;
-    
-    ;
   }
-
 });
