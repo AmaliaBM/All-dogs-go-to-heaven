@@ -48,7 +48,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let manzanasIntervalId = null;
 
   // === CARGAR PUNTUACIÓN MÁXIMA ===
-  const savedData = JSON.parse(localStorage.getItem("maxScores")) || [];
+  const savedData = JSON.parse(localStorage.getItem("maxScores")) || []; //vuelco datos de local storage
   if (savedData.length > 0) {
     const highestScore = savedData.reduce((max, player) => player.score > max ? player.score : max, 0);
     const bestPlayer = savedData.find(player => player.score === highestScore);
