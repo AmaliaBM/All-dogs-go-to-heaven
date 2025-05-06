@@ -72,12 +72,34 @@ audio {
     background-size: contain;
   
   }
+
+  #game-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
   
   #score-board {
     font-size: 24px;
+    display: flex;
+    margin-left: 5px;
     font-weight: bold;
     margin-bottom: 10px;
     color: black;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #score {
+    align-items: center;
+    justify-content: center;
+  }
+
+  #max-score{
+    align-items: center;
+    justify-content: center;
   }
 
 
@@ -89,8 +111,8 @@ audio {
     display: none;
    }
   
-   #restart-btn {
-    background-color: green;
+#restart-btn {
+    background-color: rgb(0, 123, 255);
     color: white;
     padding: 15px;
     font-size: 18px;
@@ -99,8 +121,10 @@ audio {
   }
 
 #botonesOnOff {
-  border: none;
-  margin-right: 5px;
-  margin-bottom: 7px;
-}
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center;     /* centra verticalmente */
+    margin-bottom: 7px;
+    gap: 5px; /* separa los botones */
+  }
   
