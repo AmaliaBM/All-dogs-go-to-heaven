@@ -61,6 +61,7 @@ audio {
     /*background-color: rgb(0, 191, 255);*/
     width: 800px;
     height: 600px;
+    display: none;
   
     position: relative; /* permite posicionar los elementos de forma absoluta dentro del game-box */
     overflow: hidden; /* previene que los elementos salgan visualmente del game-box */

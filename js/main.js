@@ -60,18 +60,19 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   //* EVENTOS
-  startBtnNode.addEventListener("click", () => {
-    if (playerNameInput.value.trim() === "") {
-      alert("Por favor, ingresa tu nombre.");
-      return;
-    }
-    playerName = playerNameInput.value.trim();
+ startBtnNode.addEventListener("click", () => {
+  if (playerNameInput.value.trim() === "") {
+    alert("Por favor, ingresa tu nombre.");
+    return;
+  }
+  playerName = playerNameInput.value.trim();
 
-    splashScreenNode.style.display = "none";
-    gameScreenNode.style.display = "flex";
+  splashScreenNode.style.display = "none";
+  gameScreenNode.style.display = "flex";
+  gameBoxNode.style.display = "block"; // <- AQUÍ
 
-    startGame();
-  });
+  startGame();
+});
 
   restartBtnNode.addEventListener("click", () => {
     location.reload();
