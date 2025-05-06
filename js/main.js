@@ -233,7 +233,6 @@ window.addEventListener("DOMContentLoaded", () => {
     gameOverScreenNode.style.display = "flex";
 
     scoreGameOverNode.innerText = `Tu puntuación final: ${score}`;
-    maxScoreGameOverNode.innerText = `Tu puntuación máxima: ${maxScore}`;
     document.querySelector("#player-name-gameover").innerText = `¡Hola ${playerName}!`;
   }
 });

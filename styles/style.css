@@ -39,7 +39,7 @@ audio {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   height: 500px;
-  background-image: url("../images-fondojuego-titulo/fondo-nubes-juego-8bits.png");
+  background-image: url("../images-fondojuego-titulo/nubes-fondo.png");
   background-size: cover;
   opacity: 0.15;
   z-index: -1;
@@ -69,9 +69,9 @@ audio {
   position: relative;
   overflow: hidden;
   user-select: none;
-  background-image: url("../images-fondojuego-titulo/fondo-nubes-juego-8bits.png");
+  background-image: url("../images-fondojuego-titulo/nubes-fondo.png");
   background-position: top;
-  background-size: contain;
+  background-size: cover;
 }
 
 #game-box * {
