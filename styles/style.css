@@ -97,7 +97,9 @@ audio {
     border-radius: 10px;
   }
 
-  figure { /*esto es la musica del juego, imagino que es como sale a nivel visual un reproductor ¿habrá que hidden? Pues depende, quizás vendría bien un play para que el usuario tenga autonomía si desea, o no, escuchar el sonido(?) */
-    margin: 0;
-  }
+#botonesOnOff {
+  border: none;
+  margin-right: 5px;
+  margin-bottom: 7px;
+}
   

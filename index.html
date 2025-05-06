@@ -7,7 +7,23 @@
   <title>All dogs go to heaven</title>
   <link rel="stylesheet" href="./styles/style.css" />
 </head>
-<body>
+<body> 
+  
+  <div id="game-screen" class="container" style="display: none;">
+  <!---SCORE Recolector de puntos -->
+  <div id="score-board"> <h3>Score</h3>: <span id="score" style="display: flex;">0</span></div>
+  <h3 id="max-score" style="display: flex;">Max. score:<span>10</span></h3></div>
+      
+  <!--BOTONES ONOFF DE MUSICA JUEGO-->
+ <div id="botonesOnOff">
+  <button id="soundOn-btn">
+    <img src="/images-sin-fondo/notas-musicales.png" width="35">
+  </button>
+
+  <button id="soundOff-btn">
+    <img src="/images-sin-fondo/notas-musicales-tachadas.png" width="35">
+  </button>
+  </div>
 
   <!-- PANTALLA DE INICIO -->
   <div id="splash-screen" class="container">
@@ -15,29 +31,13 @@
     <button id="start-btn">Play!</button>
   </div>
   
-  <!-- PANTALLA DE JUEGO -->
-  <div id="game-screen" class="container" style="display: none;">
+  <!-- PANTALLA DE JUEGO --> 
+    
     <!-- Elementos del juego como puntuación, vidas, etc. deberían ir aquí (dentro del game-screen pero fuera del game-box) -->
     <div id="game-box">
-      <div id="score-board"> <h3>Score</h3>: <span id="score" style="display: flex;">0</span></div>
       <!-- Los elementos del juego serán añadidos desde JS con manipulación de DOM -->
     </div>
-  </div>
-
-  <!-- SONIDOS EXTRAS?-->
-
-  <div id="botonesOnOff">
-  <button id="soundOn-btn">
-    <img src="(hacer imagen para sound ON)" width="35">
-  </button>
-
-  <button id="soundOff-btn">
-    <img src="(hacer imagen para sound OFF)" width="35">
-  </button>
-  </div>
-
-
-  
+  </div>  
   <!-- PANTALLA FINAL -->
   <div id="game-over-screen" class="container" style="display: none;">
     <img src="./images-fondojuego-titulo/Lo-has-hecho-bastante-bien.png" width="500" alt="Pantalla final: lo has hecho bien" />
