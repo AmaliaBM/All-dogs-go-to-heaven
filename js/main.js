@@ -6,6 +6,8 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
   const gameScreenNode = document.querySelector("#game-screen");
   const gameOverScreenNode = document.querySelector("#game-over-screen");
   const scoreNode = document.querySelector("#score");
+  const maxScoreNode = document.querySelector("#max-score");
+  const maxScoreGameOverNode = document.querySelector("#max-score-gameover");
 
   // botones
   const startBtnNode = document.querySelector("#start-btn");
@@ -80,6 +82,11 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
     }
     event.stopPropagation();
   });
+  
+  let maxScore = localStorage.getItem("maxScore") || 0;
+  maxScore = Number(maxScore); // Asegura que sea número
+  maxScoreNode.innerText = `Max Score: ${maxScore}`;
+
 
   function startGame() {
     score = 0;
@@ -153,6 +160,7 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
     clearInterval(manzanasIntervalId);
 
     gameScreenNode.style.display = "none";
+    maxScoreGameOverNode.innerText = `Max Score: ${maxScore}`;
     gameOverScreenNode.style.display = "flex";
   }
 
@@ -191,6 +199,11 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
         score += 1;
         scoreNode.innerText = score;
       }
+      if (score > maxScore) {
+        maxScore = score;
+        localStorage.setItem("maxScore", maxScore);
+        maxScoreNode.innerText = `Max Score: ${maxScore}`;
+      }
     });
   }
 
@@ -207,6 +220,11 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
         manzanasArr.splice(index, 1);
         score += 2;
         scoreNode.innerText = score;
+      }
+      if (score > maxScore) {
+        maxScore = score;
+        localStorage.setItem("maxScore", maxScore);
+        maxScoreNode.innerText = `Max Score: ${maxScore}`;
       }
     });
   }
