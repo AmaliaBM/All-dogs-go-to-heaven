@@ -1,4 +1,4 @@
-class manzana {
+class Manzana {
 
     /*Las manzanas deben:
 
@@ -22,9 +22,10 @@ class manzana {
     
             this.x = this.gameBoxNode.offsetWidth;
             this.y = posY;
-            this.width = 40;
-            this.height = 30;
+            this.width = 20;
+            this.height = 20;
             this.speed = 2;
+            this.node.style.zIndex = 10;
     
             // Aplicar estilo al DOM
             this.node.style.position = "absolute";

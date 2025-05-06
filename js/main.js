@@ -105,10 +105,10 @@ window.addEventListener("DOMContentLoaded", () => { //asegura que todo se ejecut
     }, 3500);
 
     manzanasIntervalId = setInterval(() => {
-      const randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 60));
-      const nuevoManzana = new manzana(gameBoxNode, randomY);
+      const randomY = Math.floor(Math.random() * (gameBoxNode.offsetHeight - 100)) + 10;
+      const nuevoManzana = new Manzana(gameBoxNode, randomY);
       manzanasArr.push(nuevoManzana);
-    }, 3500);
+    }, 3700); // desfasar un poco el tiempo    
   }
 
   function gameLoop() {
