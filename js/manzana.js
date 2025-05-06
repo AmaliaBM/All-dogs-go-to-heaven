@@ -1,10 +1,12 @@
-class PollitoAsado {
+class manzana {
 
-    /*Los pollitos asados deben:
+    /*Las manzanas deben:
 
     Entrar por la derecha y moverse a la izquierda (como las nubes).
 
-    No interferir con la lógica ni la frecuencia de aparición de las nubes.
+    No interferir con la lógica ni la frecuencia de aparición de las nubes, ni de pollitos.
+
+    Suman x2 los puntos.
 
     Ser recolectables por el personaje principal (suman puntos).
 
@@ -12,7 +14,7 @@ class PollitoAsado {
 
         constructor(gameBoxNode, posY) {
             this.node = document.createElement("img");
-            this.node.src = "./images-sin-fondo/pollitoasado-8bit.png"; // imagen 
+            this.node.src = "./images-sin-fondo/manzana.png"; // imagen 
 
             // Añadirla al DOM dentro del gameBox
             this.gameBoxNode = gameBoxNode;
@@ -22,7 +24,7 @@ class PollitoAsado {
             this.y = posY;
             this.width = 40;
             this.height = 30;
-            this.speed = 2.5;
+            this.speed = 2;
     
             // Aplicar estilo al DOM
             this.node.style.position = "absolute";

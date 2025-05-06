@@ -22,9 +22,9 @@ class Nube {
         // Posiciones y dimensiones
         this.x = this.gameBoxNode.offsetWidth; // entra desde la derecha del juego
         this.y = posY;
-        this.width = 80;
-        this.height = 60;
-        this.speed = 2.5;
+        this.width = 40;
+        this.height = 30;
+        this.speed = 3.5;
 
         // Estilo del nodo en pantalla
         this.node.style.width = `${this.width}px`;

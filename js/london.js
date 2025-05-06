@@ -24,8 +24,8 @@ class London {
 
         this.x = 50;
         this.y = 50;
-        this.w = 40;
-        this.h = 35;
+        this.w = 55;
+        this.h = 50;
 
         //vamos a cambiar el DOM para que cambie posición y dimensión de London. Definir dimensión inicial.
 
@@ -40,7 +40,7 @@ class London {
 
         //!this.gravitySpeed = 2; //esto ocurrirá 1 vez x 60s[al final no implementé esta acción]
         //!this.jumpSpeed = 40; //cuando usuario clique sobre pantalla ocurrirá esto[esta tampoco la implementé finalmente]
-        this.movementSpeed = 10; 
+        this.movementSpeed = 15; 
         
     }
        
