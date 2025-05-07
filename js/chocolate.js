@@ -1,6 +1,6 @@
-class Zanahoria {
+class Chocolate {
     /*
-      Clase Manzana:
+      Clase Chocolate:
       - Aparece desde la derecha y se desplaza hacia la izquierda, en el nivel 2.
       - No interfiere con la lógica de nubes ni pollitos, ni manzanas.
       - Vale 0.50 puntos cuando es recolectada por el personaje principal.
@@ -13,8 +13,8 @@ class Zanahoria {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "C:/images-sin-fondo/zanahoria.png";
-      this.node.style.zIndex = 10;
+      this.node.src = "./images-sin-fondo/chocolate.png";
+      this.node.style.zIndex = 20;
       this.node.style.position = "absolute";
   
       // === DIMENSIONES Y POSICIÓN INICIAL ===
@@ -37,9 +37,13 @@ class Zanahoria {
     // === MOVIMIENTO AUTOMÁTICO HACIA LA IZQUIERDA ===
     automaticMovement() {
       this.x -= this.speed;
+    
+      // Movimiento en zigzag vertical
+      this.y += Math.sin(this.x / 20) * 2; 
+    
       this.node.style.left = `${this.x}px`;
+      this.node.style.top = `${this.y}px`;
     }
-  
     // === ELIMINAR DEL DOM ===
     remove() {
       this.node.remove();

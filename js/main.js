@@ -51,7 +51,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let pollitosArr = [];
   let manzanasArr = [];
   let nubesArr = [];
-  let zanahoriasArr = [];
+  let chocolatesArr = [];
 
   let playerName = "";
   let maxScore = 0;
@@ -59,7 +59,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let nivelActual = 0;
   let currentLevelConfig = niveles[nivelActual];
 
-  let gameIntervalId, nubesIntervalId, pollitosIntervalId, manzanasIntervalId, zanahoriasIntervalId;
+  let gameIntervalId, nubesIntervalId, pollitosIntervalId, manzanasIntervalId, chocolatesIntervalId;
 
   // === CARGAR PUNTUACIÓN MÁXIMA ===
   const savedData = JSON.parse(localStorage.getItem("maxScores")) || [];
@@ -85,9 +85,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
   pauseBtnNode.addEventListener("click", () => {
     window.isPaused = !window.isPaused;
-    pauseBtnNode.innerText = window.isPaused ? "▶️ Reanudar" : "⏸️ Pausa";
-    window.isPaused ? musicaJuegoNode.pause() : musicaJuegoNode.play();
-  });
+
+    if (window.isPaused){
+      musicaJuegoNode.pause()
+      pauseBtnNode.innerText = "▶️ Reanudar";
+    } else {
+      musicaJuegoNode.play()
+      pauseBtnNode.innerText = "⏸️ Pausa";
+    }
+    });
 
   soundOnBtnDOM.addEventListener("click", () => musicaJuegoNode.play());
   soundOffBtnDOM.addEventListener("click", stopMusic);
@@ -126,9 +132,17 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function iniciarSpawners() {
-    nubesIntervalId = setInterval(() => {
+
+      nubesIntervalId = setInterval(() => {
       const y = Math.random() * (gameBoxNode.offsetHeight - 100);
-      nubesArr.push(new Nube(gameBoxNode, y));
+      let tipo = "normal";
+      if (Math.random() < 0.5){
+        tipo = "normal"
+      } else {
+        tipo = "grande"
+      }
+      const nuevaNube = new Nube(gameBoxNode, y, tipo);  
+      nubesArr.push(nuevaNube);
     }, currentLevelConfig.velocidadNubes);
 
     pollitosIntervalId = setInterval(() => {
@@ -143,10 +157,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
      // Solo en el nivel 2 (índice 1)
      if (nivelActual >= 1) {
-      zanahoriasIntervalId = setInterval(() => {
-        const y = 10 + Math.random() * (gameBoxNode.offsetHeight - 100);
-        zanahoriasArr.push(new Zanahoria(gameBoxNode, y));
-      }, 5000);
+      chocolatesIntervalId = setInterval(() => {
+        const y = Math.random() * (gameBoxNode.offsetHeight - 50);
+        chocolatesArr.push(new Chocolate(gameBoxNode, y));
+        }, 3000);
     }
   }
 
@@ -157,12 +171,12 @@ window.addEventListener("DOMContentLoaded", () => {
     moverYLimpiar(nubesArr);
     moverYLimpiar(pollitosArr);
     moverYLimpiar(manzanasArr);
-    moverYLimpiar(zanahoriasArr)
+    moverYLimpiar(chocolatesArr)
 
     checkCollisionLondonNubes();
     checkCollisionLondonPollitos();
     checkCollisionLondonManzana();
-    checkCollisionLondonZanahoria();
+    checkCollisionLondonChocolate();
   }
 
   function moverYLimpiar(arr) {
@@ -186,7 +200,16 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
-
+  
+  function checkCollisionLondonChocolate() {
+    chocolatesArr.forEach(chocolate => {
+      if (colisiona(window.londonObj, chocolate)) {
+        musicaJuegoNode.pause();
+        musicaColisionNode.play();
+        endGame();
+      }
+    });
+  }
   function checkCollisionLondonPollitos() {
     pollitosArr = pollitosArr.filter(pollito => {
       if (colisiona(window.londonObj, pollito)) {
@@ -213,18 +236,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function checkCollisionLondonZanahoria() {
-    zanahoriasArr = zanahoriasArr.filter(zanahoria => {
-      if (colisiona(window.londonObj, zanahoria)) {
-        sonidoPolloNode.play();
-        zanahoria.remove();
-        updateScore(0.5);
-        mostrarMensajeSalud(0.5, zanahoria.x, zanahoria.y);
-        return false;
-      }
-      return true;
-    });
-  }
+ 
   
   function colisiona(a, b) {
     return (
@@ -265,7 +277,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function updateNivel() {
     clearInterval(manzanasIntervalId);
     clearInterval(pollitosIntervalId);
-    clearInterval(zanahoriasIntervalId);
+    clearInterval(chocolatesIntervalId);
     iniciarSpawners();
     console.log(`¡Nivel ${nivelActual + 1} alcanzado!`);
     showLevelUpMessage(nivelActual + 1);
@@ -311,7 +323,7 @@ window.addEventListener("DOMContentLoaded", () => {
     clearInterval(nubesIntervalId);
     clearInterval(pollitosIntervalId);
     clearInterval(manzanasIntervalId);
-    clearInterval(zanahoriasIntervalId);
+    clearInterval(chocolatesIntervalId);
 
     mostrarRanking();
 

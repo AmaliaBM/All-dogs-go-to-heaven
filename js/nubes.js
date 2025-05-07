@@ -7,7 +7,7 @@ class Nube {
       - Tiene control de aparición y eliminación independiente.
     */
   
-    constructor(gameBoxNode, posY) {
+    constructor(gameBoxNode, posY, tipo) {
       // === REFERENCIA AL CONTENEDOR DEL JUEGO ===
       this.gameBoxNode = gameBoxNode;
   
@@ -17,12 +17,19 @@ class Nube {
       this.node.style.position = "absolute";
   
       // === DIMENSIONES Y POSICIÓN INICIAL ===
-      this.width = 40;
-      this.height = 30;
+      if (tipo === "grande") {
+        this.width = 60;
+        this.height = 50;
+        this.speed = 5; // más rápida
+      } else {
+        this.width = 40;
+        this.height = 30;
+        this.speed = 3.5; // original
+      }
+      
       this.x = this.gameBoxNode.offsetWidth;
       this.y = posY;
-      this.speed = 3.5;
-  
+
       // === APLICAR ESTILOS INICIALES ===
       this.node.style.width = `${this.width}px`;
       this.node.style.height = `${this.height}px`;
