@@ -13,7 +13,7 @@ class Nube {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/nube-horizontal-8bits.png";
+      this.node.src = "./images-sin-fondo/nuevanube.png";
       this.node.style.position = "absolute";
   
       // === DIMENSIONES Y POSICIÓN INICIAL ===
