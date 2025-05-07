@@ -182,24 +182,25 @@ window.addEventListener("DOMContentLoaded", () => {
         sonidoPolloNode.play();
         pollito.remove();
         updateScore(1);
+        mostrarMensajeSalud(1, pollito.x, pollito.y);
         return false;
       }
       return true;
     });
   }
-
+  
   function checkCollisionLondonManzana() {
     manzanasArr = manzanasArr.filter(manzana => {
       if (colisiona(window.londonObj, manzana)) {
         sonidoManzanaNode.play();
         manzana.remove();
-        updateScore(2);
+        mostrarMensajeSalud(2, manzana.x, manzana.y);
         return false;
       }
       return true;
     });
   }
-
+  
   function colisiona(a, b) {
     return (
       a.x < b.x + b.width &&
@@ -254,6 +255,30 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 2500); // Dura 2.5 segundos
   }
 
+  function mostrarMensajeSalud(puntosGanados, x = window.innerWidth / 2, y = 100) {
+    const mensaje = document.createElement("div");
+    mensaje.textContent = `¡+${puntosGanados} en salud!`;
+    mensaje.style.position = "absolute";
+    mensaje.style.left = `${x}px`;
+    mensaje.style.top = `${y}px`;
+    mensaje.style.transform = "translate(-50%, 0)";
+    mensaje.style.color = "#4CAF50";
+    mensaje.style.fontWeight = "bold";
+    mensaje.style.fontSize = "20px";
+    mensaje.style.opacity = 1;
+    mensaje.style.transition = "all 1s ease-out";
+    mensaje.style.zIndex = 1000;
+  
+    document.getElementById("mensajes-salud").appendChild(mensaje);
+    setTimeout(() => {
+      mensaje.style.top = `${y - 40}px`;
+      mensaje.style.opacity = 0;
+    }, 50);
+  
+    setTimeout(() => {
+      mensaje.remove();
+    }, 1100);
+  }
   // === FINAL DEL JUEGO ===
   function endGame() {
     clearInterval(gameIntervalId);
