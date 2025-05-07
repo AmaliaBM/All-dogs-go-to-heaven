@@ -1,21 +1,8 @@
-// === FUNCIONES DE MOVIMIENTO para móvil ===
-function handleMoveUp(event) {
-  event.preventDefault();
-  if (window.londonObj && !window.isPaused) window.londonObj.moveUp();
-}
 
-function handleMoveDown(event) {
-  event.preventDefault();
-  if (window.londonObj && !window.isPaused) window.londonObj.moveDown();
-}
 
 // === INICIO DEL JUEGO ===
 window.addEventListener("DOMContentLoaded", () => {
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-  if (isMobile) {
-    document.getElementById("mobile-controls").style.display = "flex";
-  }
-
+  
   // === ELEMENTOS DEL DOM ===
   const splashScreenNode = document.querySelector("#splash-screen");
   const gameScreenNode = document.querySelector("#game-screen");
@@ -30,15 +17,6 @@ window.addEventListener("DOMContentLoaded", () => {
   const soundOnBtnDOM = document.querySelector("#soundOn-btn");
   const soundOffBtnDOM = document.querySelector("#soundOff-btn");
   const gameBoxNode = document.querySelector("#game-box");
-
-  const btnUp = document.getElementById("btn-up");
-  const btnDown = document.getElementById("btn-down");
-
-  btnUp.addEventListener("click", handleMoveUp);
-  btnUp.addEventListener("touchstart", handleMoveUp, { passive: false });
-
-  btnDown.addEventListener("click", handleMoveDown);
-  btnDown.addEventListener("touchstart", handleMoveDown, { passive: false });
 
   // === SONIDOS ===
   const musicaJuegoNode = document.querySelector("#musicajuego");

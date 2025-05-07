@@ -4,7 +4,6 @@ body {
   background-color: #fff;
   overflow-x: hidden;
   font-family: sans-serif;
-  touch-action: manipulation; /* Mejora respuesta táctil */
 }
 
 audio {
@@ -17,32 +16,6 @@ audio {
   justify-content: center;
   align-items: center;
   margin: 50px;
-}
-
-/* === POSICIONAMIENTO DE BOTONES DE CONTROL PARA MÓVIL === */
-#mobile-controls {
-  display: none;
-  position: fixed;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  justify-content: center;
-  gap: 10px;
-  z-index: 10; /*z-index propiedad que controla superposición de los elementos en una página web. Determina cuál elemento se muestra por encima o por debajo de otros cuando los elementos se solapan, si Z Index sees mayor se muestra sobre otro
-  Solo afecta a posicionamientos relative, absolute etc... */
-  pointer-events: auto;
-}
-
-#mobile-controls button {
-  width: 60px;
-  height: 60px;
-  font-size: 24px;
-  border-radius: 50%;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  touch-action: manipulation;
 }
 
 .level-up-message {
@@ -60,69 +33,6 @@ audio {
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: 999;
-}
-
-
-/* === ADAPTACIONES RESPONSIVE PARA MÓVIL === */
-@media (max-width: 600px) {
-  #game-box {
-    width: 100vw;
-    height: 70vh;
-  }
-
-  #mobile-controls {
-    display: flex;
-    bottom: 10px;
-    gap: 10px;
-  }
-
-  #splash-screen {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-
-  #game-screen {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-  }
-
-  #score,
-  #max-score {
-    font-size: 18px; /* Reducir el tamaño de la fuente para pantallas pequeñas */
-  }
-
-  #splash-screen img {
-    width: 80%; /* Ajusta el tamaño de la imagen del logo en pantallas pequeñas */
-  }
-
-  body {
-    overflow: hidden;
-  }
-
-  #pause-btn {
-    font-size: 16px;
-    padding: 10px 15px;
-  }
-
-  #restart-btn {
-    font-size: 16px;
-    padding: 10px 15px;
-  }
-
-  html, body {
-    overscroll-behavior: none;
-    touch-action: none;
-  }
-
-
 }
 
 /* === PANTALLA DE INICIO === */
