@@ -181,8 +181,8 @@ window.addEventListener("DOMContentLoaded", () => {
       if (colisiona(window.londonObj, pollito)) {
         sonidoPolloNode.play();
         pollito.remove();
-        updateScore(1);
-        mostrarMensajeSalud(1, pollito.x, pollito.y);
+        updateScore(2);
+        mostrarMensajeSalud(2, pollito.x, pollito.y);
         return false;
       }
       return true;
@@ -194,7 +194,8 @@ window.addEventListener("DOMContentLoaded", () => {
       if (colisiona(window.londonObj, manzana)) {
         sonidoManzanaNode.play();
         manzana.remove();
-        mostrarMensajeSalud(2, manzana.x, manzana.y);
+        updateScore(1);
+        mostrarMensajeSalud(1, manzana.x, manzana.y);
         return false;
       }
       return true;
@@ -217,7 +218,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     if (score > maxScore) {
       maxScore = score;
-      maxScoreNode.innerText = `Max Score: ${maxScore} (${playerName})`;
+      maxScoreNode.innerText = `Máxima puntuación en salud: ${maxScore} (${playerName})`;
       const maxScores = JSON.parse(localStorage.getItem("maxScores")) || [];
       const existing = maxScores.find(p => p.name === playerName);
       if (existing) existing.score = maxScore;
