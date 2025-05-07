@@ -1,4 +1,4 @@
-class Brocoli {
+class Zanahoria {
     /*
       - Aparece desde la derecha y se desplaza hacia la izquierda.
       - Aparece solo en el momento bonus, con todos los demás alimentos saludables (no nocivos)
@@ -10,7 +10,7 @@ class Brocoli {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/brocoli.png";
+      this.node.src = "./images-sin-fondo/zanahoria.png";
       this.node.style.zIndex = 10;
       this.node.style.position = "absolute";
   
@@ -42,4 +42,3 @@ class Brocoli {
       this.node.remove();
     }
   }
-  

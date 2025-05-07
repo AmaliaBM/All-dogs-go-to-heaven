@@ -272,6 +272,9 @@ window.addEventListener("DOMContentLoaded", () => {
       currentLevelConfig = niveles[nivelActual];
       updateNivel();
     }
+    if (nivelActual > 5) {
+      activarBonusStage();
+    }
   }
 
   function updateNivel() {
@@ -293,6 +296,45 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 2500); // Dura 2.5 segundos
   }
 
+    function activarBonusStage() {
+    clearAllSpawners(); // detiene las nubes y chocolates
+    mostrarMensajeBonus(); // muestra un texto en pantalla
+  
+    // !Spawners solo de elementos positivos
+    manzanasIntervalId = setInterval(spawnManzana, 1000);
+    pollitosIntervalId = setInterval(spawnPollito, 1200);
+  
+    // Opcional: cambiar fondo o animaciones
+    document.body.classList.add("bonus-background");
+  
+    // Después de X segundos termina el bonus
+    setTimeout(() => {
+      clearAllSpawners();
+      ocultarMensajeBonus();
+      finalizarJuego(); // o volver al juego normal
+    }, 15000); // 15 segundos de bonus
+    }
+
+    function mostrarMensajeBonus() {
+      const msg = document.createElement("div");
+      msg.innerText = "BONUS STAGE!";
+      msg.id = "bonus-msg";
+      msg.style.position = "absolute";
+      msg.style.top = "50%";
+      msg.style.left = "50%";
+      msg.style.transform = "translate(-50%, -50%)";
+      msg.style.fontSize = "48px";
+      msg.style.color = "gold";
+      msg.style.zIndex = "100";
+      document.body.appendChild(msg);
+    }
+
+    function ocultarMensajeBonus() {
+      const msg = document.getElementById("bonus-msg");
+      if (msg) msg.remove();
+    }
+
+  
   function mostrarMensajeSalud(puntosGanados, x = window.innerWidth / 2, y = 100) {
     const mensaje = document.createElement("div");
     mensaje.textContent = `¡+${puntosGanados} en salud!`;
