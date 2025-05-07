@@ -1,6 +1,7 @@
+// === FUNCIONES DE MOVIMIENTO ===
 function handleMoveUp(event) {
   event.preventDefault(); 
-  if (window.londonObj && !window.isPaused) { //saco estas funciones del DOMContent porque si no son incompatibles con jugar desde el ordenador y dejan el juego inutil
+  if (window.londonObj && !window.isPaused) {
     window.londonObj.moveUp();
   }
 }
@@ -12,11 +13,11 @@ function handleMoveDown(event) {
   }
 }
 
+// === INICIO DEL JUEGO ===
 window.addEventListener("DOMContentLoaded", () => {
-
+  
   // === DETECCIÓN DE DISPOSITIVO MÓVIL === 
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); //comprobar que visitan desde web
-
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if (isMobile) {
     document.getElementById("mobile-controls").style.display = "flex";
   }
@@ -35,23 +36,16 @@ window.addEventListener("DOMContentLoaded", () => {
   const soundOnBtnDOM = document.querySelector("#soundOn-btn");
   const soundOffBtnDOM = document.querySelector("#soundOff-btn");
   const gameBoxNode = document.querySelector("#game-box");
-  
 
   // === BOTONES DE CONTROL TÁCTIL ===
   const btnUp = document.getElementById("btn-up");
   const btnDown = document.getElementById("btn-down");
-  document.getElementById("btn-up").addEventListener("click", moveUp);
-  document.getElementById("btn-down").addEventListener("click", moveDown);
 
-  if (btnUp) {
-    btnUp.addEventListener("click", handleMoveUp);
-    btnUp.addEventListener("touchstart", handleMoveUp, { passive: false });
-  }
-
-  if (btnDown) {
-    btnDown.addEventListener("click", handleMoveDown);
-    btnDown.addEventListener("touchstart", handleMoveDown, { passive: false });
-  }
+  btnUp.addEventListener("click", handleMoveUp);
+  btnUp.addEventListener("touchstart", handleMoveUp, { passive: false });
+  
+  btnDown.addEventListener("click", handleMoveDown);
+  btnDown.addEventListener("touchstart", handleMoveDown, { passive: false });
 
   // === SONIDOS ===
   const musicaJuegoNode = document.querySelector("#musicajuego");
@@ -97,7 +91,7 @@ window.addEventListener("DOMContentLoaded", () => {
     maxScoreNode.innerText = `Max Score: ${maxScore} (${playerName})`;
   }
 
-  // === EVENTOS ===
+  // === EVENTOS DE BOTONES ===
   startBtnNode.addEventListener("click", () => {
     if (playerNameInput.value.trim() === "") {
       alert("Por favor, ingresa tu nombre.");
@@ -114,7 +108,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   pauseBtnNode.addEventListener("click", () => {
     window.isPaused = !window.isPaused;
-
     if (window.isPaused) {
       pauseBtnNode.innerText = "▶️ Reanudar";
       musicaJuegoNode.pause();
@@ -144,18 +137,7 @@ window.addEventListener("DOMContentLoaded", () => {
     event.stopPropagation();
   });
 
-  // Añadir eventos táctiles
-document.getElementById("btn-up").addEventListener("touchstart", moveUp);
-document.getElementById("btn-down").addEventListener("touchstart", moveDown);
-function moveUp() {
-  if (londonObj && !isPaused) londonObj.moveUp();
-}
-
-function moveDown() {
-  if (londonObj && !isPaused) londonObj.moveDown();
-}
-
-  // === INICIO DEL JUEGO ===
+  // === FUNCIONES DE INICIO DEL JUEGO ===
   function startGame() {
     score = 0;
     scoreNode.innerText = score;
@@ -217,10 +199,10 @@ function moveDown() {
   function checkCollisionLondonNubes() {
     nubesArr.forEach((nube) => {
       if (
-        londonObj.x < nube.x + nube.width &&
-        londonObj.x + londonObj.w > nube.x &&
-        londonObj.y < nube.y + nube.height &&
-        londonObj.y + londonObj.h > nube.y
+        window.londonObj.x < nube.x + nube.width &&
+        window.londonObj.x + window.londonObj.w > nube.x &&
+        window.londonObj.y < nube.y + nube.height &&
+        window.londonObj.y + window.londonObj.h > nube.y
       ) {
         musicaJuegoNode.pause();
         musicaColisionNode.play();
@@ -232,10 +214,10 @@ function moveDown() {
   function checkCollisionLondonPollitos() {
     pollitosArr.forEach((pollito, index) => {
       if (
-        londonObj.x < pollito.x + pollito.width &&
-        londonObj.x + londonObj.w > pollito.x &&
-        londonObj.y < pollito.y + pollito.height &&
-        londonObj.y + londonObj.h > pollito.y
+        window.londonObj.x < pollito.x + pollito.width &&
+        window.londonObj.x + window.londonObj.w > pollito.x &&
+        window.londonObj.y < pollito.y + pollito.height &&
+        window.londonObj.y + window.londonObj.h > pollito.y
       ) {
         sonidoPolloNode.play();
         pollito.remove();
@@ -248,10 +230,10 @@ function moveDown() {
   function checkCollisionLondonManzana() {
     manzanasArr.forEach((manzana, index) => {
       if (
-        londonObj.x < manzana.x + manzana.width &&
-        londonObj.x + londonObj.w > manzana.x &&
-        londonObj.y < manzana.y + manzana.height &&
-        londonObj.y + londonObj.h > manzana.y
+        window.londonObj.x < manzana.x + manzana.width &&
+        window.londonObj.x + window.londonObj.w > manzana.x &&
+        window.londonObj.y < manzana.y + manzana.height &&
+        window.londonObj.y + window.londonObj.h > manzana.y
       ) {
         sonidoPolloNode.play();
         manzana.remove();
@@ -276,27 +258,27 @@ function moveDown() {
     }
   }
 
+  // === RANKING ===
   function mostrarRanking() {
     const rankingList = document.querySelector("#ranking-list");
     rankingList.innerHTML = "";
-
     const maxScores = JSON.parse(localStorage.getItem("maxScores")) || [];
     const existingPlayer = maxScores.find(p => p.name === playerName);
     if (existingPlayer) {
-      if (score > existingPlayer.score) existingPlayer.score = score;
+    if (score > existingPlayer.score) existingPlayer.score = score;
     } else {
-      maxScores.push({ name: playerName, score });
+    maxScores.push({ name: playerName, score });
     }
 
     maxScores.sort((a, b) => b.score - a.score);
     localStorage.setItem("maxScores", JSON.stringify(maxScores.slice(0, 5)));
 
     maxScores.slice(0, 5).forEach((player) => {
-      const li = document.createElement("li");
-      li.innerText = `${player.name}: ${player.score} puntos`;
-      rankingList.appendChild(li);
-    });
-  }
+    const li = document.createElement("li");
+    li.innerText = `${player.name}: ${player.score} puntos`;
+    rankingList.appendChild(li);
+  });
+}
 
   // === FINALIZAR JUEGO ===
   function endGame() {
@@ -305,14 +287,22 @@ function moveDown() {
     clearInterval(pollitosIntervalId);
     clearInterval(manzanasIntervalId);
     mostrarRanking();
-
     gameScreenNode.style.display = "none";
     gameBoxNode.style.display = "none";
     gameOverScreenNode.style.display = "flex";
 
     scoreGameOverNode.innerText = `Tu puntuación final: ${score}`;
     document.querySelector("#player-name-gameover").innerText = `¡Hola ${playerName}!`;
+
+    gameScreenNode.style.display = "none";
+    gameBoxNode.style.display = "none";
+    gameOverScreenNode.style.display = "flex";
+    
+    scoreGameOverNode.innerText = `Tu puntuación final: ${score}`;
+    document.querySelector("#player-name-gameover").innerText = `¡Hola ${playerName}!`;
+
   }
 });
+    
 
 
