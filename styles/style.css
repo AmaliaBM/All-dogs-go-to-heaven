@@ -2,6 +2,7 @@
 body {
   margin: 0;
   background-color: #fff;
+  overflow-x: hidden;
 }
 
 audio {
@@ -16,18 +17,48 @@ audio {
   margin: 50px;
 }
 
-/* === CSS POSICIONAMIENTO BOTONES CONTROL EN EL MOVIL === */
+/* === POSICIONAMIENTO DE BOTONES DE CONTROL PARA MÓVIL === */
 #mobile-controls {
+  display: none;
   position: fixed;
-  bottom: 20px;
-  left: 20px;
-  display: flex;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  justify-content: center;
   gap: 10px;
-  z-index: 999;
+  z-index: 10;
 }
+
 #mobile-controls button {
+  width: 60px;
+  height: 60px;
   font-size: 24px;
-  padding: 10px;
+  border-radius: 50%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+/* === ADAPTACIONES RESPONSIVE PARA MÓVIL === */
+@media (max-width: 600px) {
+  #game-box {
+    width: 100vw;
+    height: 70vh;
+  }
+
+  #mobile-controls {
+    display: flex;
+  }
+
+  #score,
+  #max-score {
+    font-size: 16px;
+  }
+
+  body {
+    overflow: hidden;
+    touch-action: none;
+  }
 }
 
 /* === PANTALLA DE INICIO === */
@@ -51,7 +82,10 @@ audio {
 #splash-screen::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   height: 500px;
   background-image: url("../images-fondojuego-titulo/nubes-fondo.png");
   background-size: cover;
@@ -92,6 +126,7 @@ audio {
   pointer-events: none;
 }
 
+/* === BOTÓN DE PAUSA === */
 #pause-btn {
   background-color: rgb(64, 142, 231);
   color: rgb(0, 0, 0);
