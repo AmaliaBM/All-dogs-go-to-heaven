@@ -22,8 +22,8 @@ window.addEventListener("DOMContentLoaded", () => {
   const musicaJuegoNode = document.querySelector("#musicajuego");
   const musicaColisionNode = document.querySelector("#musicacolision");
   const sonidoPolloNode = document.querySelector("#sonidocomerpollo");
-  const sonidoManzanaNode = document.querySelector("#sonidocomermanzana") || sonidoPolloNode; // fallback
-
+  const sonidoManzanaNode = document.querySelector("#sonidocomerpollo");
+ 
   musicaJuegoNode.volume = 0.1;
   musicaJuegoNode.addEventListener("ended", function () {
     this.currentTime = 0;
@@ -51,6 +51,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let pollitosArr = [];
   let manzanasArr = [];
   let nubesArr = [];
+  let zanahoriasArr = [];
 
   let playerName = "";
   let maxScore = 0;
@@ -58,7 +59,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let nivelActual = 0;
   let currentLevelConfig = niveles[nivelActual];
 
-  let gameIntervalId, nubesIntervalId, pollitosIntervalId, manzanasIntervalId;
+  let gameIntervalId, nubesIntervalId, pollitosIntervalId, manzanasIntervalId, zanahoriasIntervalId;
 
   // === CARGAR PUNTUACIÓN MÁXIMA ===
   const savedData = JSON.parse(localStorage.getItem("maxScores")) || [];
@@ -139,6 +140,14 @@ window.addEventListener("DOMContentLoaded", () => {
       const y = 10 + Math.random() * (gameBoxNode.offsetHeight - 100);
       manzanasArr.push(new Manzana(gameBoxNode, y));
     }, 3700);
+
+     // Solo en el nivel 2 (índice 1)
+     if (nivelActual >= 1) {
+      zanahoriasIntervalId = setInterval(() => {
+        const y = 10 + Math.random() * (gameBoxNode.offsetHeight - 100);
+        zanahoriasArr.push(new Zanahoria(gameBoxNode, y));
+      }, 5000);
+    }
   }
 
   // === GAME LOOP ===
@@ -148,10 +157,12 @@ window.addEventListener("DOMContentLoaded", () => {
     moverYLimpiar(nubesArr);
     moverYLimpiar(pollitosArr);
     moverYLimpiar(manzanasArr);
+    moverYLimpiar(zanahoriasArr)
 
     checkCollisionLondonNubes();
     checkCollisionLondonPollitos();
     checkCollisionLondonManzana();
+    checkCollisionLondonZanahoria();
   }
 
   function moverYLimpiar(arr) {
@@ -192,10 +203,23 @@ window.addEventListener("DOMContentLoaded", () => {
   function checkCollisionLondonManzana() {
     manzanasArr = manzanasArr.filter(manzana => {
       if (colisiona(window.londonObj, manzana)) {
-        sonidoManzanaNode.play();
+        sonidoPolloNode.play();
         manzana.remove();
         updateScore(1);
         mostrarMensajeSalud(1, manzana.x, manzana.y);
+        return false;
+      }
+      return true;
+    });
+  }
+
+  function checkCollisionLondonZanahoria() {
+    zanahoriasArr = zanahoriasArr.filter(zanahoria => {
+      if (colisiona(window.londonObj, zanahoria)) {
+        sonidoPolloNode.play();
+        zanahoria.remove();
+        updateScore(0.5);
+        mostrarMensajeSalud(0.5, zanahoria.x, zanahoria.y);
         return false;
       }
       return true;
@@ -241,6 +265,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function updateNivel() {
     clearInterval(manzanasIntervalId);
     clearInterval(pollitosIntervalId);
+    clearInterval(zanahoriasIntervalId);
     iniciarSpawners();
     console.log(`¡Nivel ${nivelActual + 1} alcanzado!`);
     showLevelUpMessage(nivelActual + 1);
@@ -286,6 +311,7 @@ window.addEventListener("DOMContentLoaded", () => {
     clearInterval(nubesIntervalId);
     clearInterval(pollitosIntervalId);
     clearInterval(manzanasIntervalId);
+    clearInterval(zanahoriasIntervalId);
 
     mostrarRanking();
 
