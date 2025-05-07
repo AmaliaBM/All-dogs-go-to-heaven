@@ -1,4 +1,9 @@
 window.addEventListener("DOMContentLoaded", () => {
+
+  // === ADAPTACION A MÓVIL === 
+  if (isMobile) {
+    document.getElementById("mobile-controls").style.display = "flex";
+  }
   // === ELEMENTOS DEL DOM ===
   const splashScreenNode = document.querySelector("#splash-screen");
   const gameScreenNode = document.querySelector("#game-screen");
@@ -6,13 +11,14 @@ window.addEventListener("DOMContentLoaded", () => {
   const scoreNode = document.querySelector("#score");
   const maxScoreNode = document.querySelector("#max-score");
   const scoreGameOverNode = document.querySelector("#score-gameover");
-   const playerNameInput = document.querySelector("#player-name-input");
+  const playerNameInput = document.querySelector("#player-name-input");
   const startBtnNode = document.querySelector("#start-btn");
   const pauseBtnNode = document.querySelector("#pause-btn");
   const restartBtnNode = document.querySelector("#restart-btn");
   const soundOnBtnDOM = document.querySelector("#soundOn-btn");
   const soundOffBtnDOM = document.querySelector("#soundOff-btn");
   const gameBoxNode = document.querySelector("#game-box");
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent); //comprobar si visitan desde movil o tableta, tiene resultado booleano.
 
   // === SONIDOS ===
   const musicaJuegoNode = document.querySelector("#musicajuego");
@@ -103,6 +109,13 @@ window.addEventListener("DOMContentLoaded", () => {
     }
 
     event.stopPropagation();
+  });
+
+  document.getElementById("btn-up").addEventListener("click", () => { //¿VINCULADO LONDON EN EL MOVIL TAMBIEN?
+    if (londonObj && !isPaused) londonObj.moveUp();
+  });
+  document.getElementById("btn-down").addEventListener("click", () => {
+    if (londonObj && !isPaused) londonObj.moveDown();
   });
 
   // === INICIO DEL JUEGO ===
