@@ -6,9 +6,9 @@ window.addEventListener("DOMContentLoaded", () => {
   const scoreNode = document.querySelector("#score");
   const maxScoreNode = document.querySelector("#max-score");
   const scoreGameOverNode = document.querySelector("#score-gameover");
-  const maxScoreGameOverNode = document.querySelector("#max-score-gameover");
-  const playerNameInput = document.querySelector("#player-name-input");
+   const playerNameInput = document.querySelector("#player-name-input");
   const startBtnNode = document.querySelector("#start-btn");
+  const pauseBtnNode = document.querySelector("#pause-btn");
   const restartBtnNode = document.querySelector("#restart-btn");
   const soundOnBtnDOM = document.querySelector("#soundOn-btn");
   const soundOffBtnDOM = document.querySelector("#soundOff-btn");
@@ -41,6 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let playerName = "";
   let maxScore = 0;
   let score = 0;
+  let isPaused = false;
 
   let gameIntervalId = null;
   let nubesIntervalId = null;
@@ -48,7 +49,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let manzanasIntervalId = null;
 
   // === CARGAR PUNTUACIÓN MÁXIMA ===
-  const savedData = JSON.parse(localStorage.getItem("maxScores")) || []; //vuelco datos de local storage
+  const savedData = JSON.parse(localStorage.getItem("maxScores")) || [];
   if (savedData.length > 0) {
     const highestScore = savedData.reduce((max, player) => player.score > max ? player.score : max, 0);
     const bestPlayer = savedData.find(player => player.score === highestScore);
@@ -72,11 +73,23 @@ window.addEventListener("DOMContentLoaded", () => {
 
   restartBtnNode.addEventListener("click", () => location.reload());
 
+  pauseBtnNode.addEventListener("click", () => {
+    isPaused = !isPaused;
+
+    if (isPaused) {
+      pauseBtnNode.innerText = "▶️ Reanudar";
+      musicaJuegoNode.pause();
+    } else {
+      pauseBtnNode.innerText = "⏸️ Pausa";
+      musicaJuegoNode.play();
+    }
+  });
+
   soundOnBtnDOM.addEventListener("click", () => musicaJuegoNode.play());
   soundOffBtnDOM.addEventListener("click", stopMusic);
 
   document.addEventListener("keydown", (event) => {
-    if (!londonObj) return;
+    if (!londonObj || isPaused) return;
 
     if (event.key === "ArrowUp") {
       event.preventDefault();
@@ -122,7 +135,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // === BUCLE PRINCIPAL ===
   function gameLoop() {
-    if (!londonObj) return;
+    if (isPaused || !londonObj) return;
 
     moveAndClean(nubesArr);
     moveAndClean(pollitosArr);
@@ -211,9 +224,17 @@ window.addEventListener("DOMContentLoaded", () => {
     rankingList.innerHTML = "";
 
     const maxScores = JSON.parse(localStorage.getItem("maxScores")) || [];
-    const topPlayers = maxScores.sort((a, b) => b.score - a.score).slice(0, 5);
+    const existingPlayer = maxScores.find(p => p.name === playerName); //Si existe un jugador que es el mismo y ha acumulado más puntos, solo se re-actualiza su score. 
+    if (existingPlayer) {
+      if (score > existingPlayer.score) existingPlayer.score = score;
+    } else {
+      maxScores.push({ name: playerName, score });
+    }
 
-    topPlayers.forEach((player) => {
+    maxScores.sort((a, b) => b.score - a.score);
+    localStorage.setItem("maxScores", JSON.stringify(maxScores.slice(0, 5)));
+
+    maxScores.slice(0, 5).forEach((player) => {
       const li = document.createElement("li");
       li.innerText = `${player.name}: ${player.score} puntos`;
       rankingList.appendChild(li);

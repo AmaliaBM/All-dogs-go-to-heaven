@@ -78,6 +78,16 @@ audio {
   pointer-events: none;
 }
 
+#pause-btn {
+  background-color: rgb(64, 142, 231);
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
 /* === SCOREBOARD === */
 #score-board {
   display: flex;
