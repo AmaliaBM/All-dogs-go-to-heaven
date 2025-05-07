@@ -35,10 +35,13 @@ window.addEventListener("DOMContentLoaded", () => {
   const soundOnBtnDOM = document.querySelector("#soundOn-btn");
   const soundOffBtnDOM = document.querySelector("#soundOff-btn");
   const gameBoxNode = document.querySelector("#game-box");
+  
 
   // === BOTONES DE CONTROL TÁCTIL ===
   const btnUp = document.getElementById("btn-up");
   const btnDown = document.getElementById("btn-down");
+  document.getElementById("btn-up").addEventListener("click", moveUp);
+  document.getElementById("btn-down").addEventListener("click", moveDown);
 
   if (btnUp) {
     btnUp.addEventListener("click", handleMoveUp);
@@ -140,6 +143,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
     event.stopPropagation();
   });
+
+  // Añadir eventos táctiles
+document.getElementById("btn-up").addEventListener("touchstart", moveUp);
+document.getElementById("btn-down").addEventListener("touchstart", moveDown);
+function moveUp() {
+  if (londonObj && !isPaused) londonObj.moveUp();
+}
+
+function moveDown() {
+  if (londonObj && !isPaused) londonObj.moveDown();
+}
 
   // === INICIO DEL JUEGO ===
   function startGame() {
