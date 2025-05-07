@@ -3,6 +3,8 @@ body {
   margin: 0;
   background-color: #fff;
   overflow-x: hidden;
+  font-family: sans-serif;
+  touch-action: manipulation; /* Mejora respuesta táctil */
 }
 
 audio {
@@ -26,7 +28,9 @@ audio {
   right: 0;
   justify-content: center;
   gap: 10px;
-  z-index: 10;
+  z-index: 10; /*z-index propiedad que controla superposición de los elementos en una página web. Determina cuál elemento se muestra por encima o por debajo de otros cuando los elementos se solapan, si Z Index sees mayor se muestra sobre otro
+  Solo afecta a posicionamientos relative, absolute etc... */
+  pointer-events: auto;
 }
 
 #mobile-controls button {
@@ -37,6 +41,8 @@ audio {
   background-color: #007bff;
   color: white;
   border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  touch-action: manipulation;
 }
 
 /* === ADAPTACIONES RESPONSIVE PARA MÓVIL === */
@@ -57,6 +63,10 @@ audio {
 
   body {
     overflow: hidden;
+  }
+
+  html, body {
+    overscroll-behavior: none;
     touch-action: none;
   }
 }
@@ -72,11 +82,14 @@ audio {
   height: 500px;
   background-size: cover;
   overflow: hidden;
+  text-align: center;
+  padding: 20px;
 }
 
 #splash-screen img {
   border: 10px solid blue;
   border-radius: 15px;
+  max-width: 90%;
 }
 
 #splash-screen::before {
@@ -100,6 +113,8 @@ audio {
   font-size: 20px;
   border-radius: 10px;
   margin-top: 0;
+  border: none;
+  cursor: pointer;
 }
 
 /* === PANTALLA DE JUEGO === */
@@ -120,6 +135,7 @@ audio {
   background-image: url("../images-fondojuego-titulo/nubes-fondo.png");
   background-position: top;
   background-size: cover;
+  touch-action: none;
 }
 
 #game-box * {
@@ -135,6 +151,7 @@ audio {
   border-radius: 8px;
   margin-top: 10px;
   cursor: pointer;
+  border: none;
 }
 
 /* === SCOREBOARD === */
@@ -170,6 +187,8 @@ audio {
   font-size: 18px;
   margin-top: 20px;
   border-radius: 10px;
+  border: none;
+  cursor: pointer;
 }
 
 /* === BOTONES DE SONIDO === */
