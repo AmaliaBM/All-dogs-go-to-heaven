@@ -3,7 +3,7 @@ class Nube {
       Clase Nube:
       - Entra por la derecha y se mueve hacia la izquierda.
       - No interfiere con la lógica ni frecuencia de los pollitos.
-      - Colisiona con el personaje principal (London), lo que provoca el fin del juego.
+      - Colisiona con el personaje principal ES NOCIVO (London), lo que provoca el fin del juego.
       - Tiene control de aparición y eliminación independiente.
     */
   

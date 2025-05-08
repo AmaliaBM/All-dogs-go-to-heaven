@@ -1,7 +1,7 @@
 class Chocolate {
     /*
       Clase Chocolate:
-      - Aparece desde la derecha y se desplaza hacia la izquierda, en el nivel 2.
+      - Aparece desde la derecha y se desplaza hacia la izquierda, en el nivel 2. ES NOCIVO.
       - No interfiere con la lógica de nubes ni pollitos, ni manzanas.
       - Vale 0.50 puntos cuando es recolectada por el personaje principal.
       - Tiene su propio control de aparición y eliminación.

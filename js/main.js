@@ -200,15 +200,15 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function moverYLimpiar(arr) {
-    arr.forEach(obj => obj.automaticMovement());
-    arr = arr.filter(obj => {
+    for (let i = arr.length - 1; i >= 0; i--) {
+      let obj = arr[i];
+      obj.automaticMovement();
       if (obj.x + obj.width < 0) {
-        obj.remove();
-        return false;
+        arr.splice(i, 1); // Elimina del array original
       }
-      return true;
-    });
+    }
   }
+  
 
   // === COLISIONES ===
   function checkCollisionLondonNubes() {
@@ -280,6 +280,7 @@ window.addEventListener("DOMContentLoaded", () => {
       }
       return true;
     });
+  }
 
     function checkCollisionLondonAceite() {
       aceitesArr = aceitesArr.filter(aceite => {
@@ -349,21 +350,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
-  }
-
  
   
-  function colisiona(a, b) {
-    return (
-      a.x < b.x + b.width &&
-      a.x + a.w > b.x &&
-      a.y < b.y + b.height &&
-      a.y + a.h > b.y
-    );
-  }
-
+    function colisiona(a, b) {
+      return (
+        a.x < b.x + b.width &&
+        a.x + a.width > b.x &&    // Cambié a.w por a.width
+        a.y < b.y + b.height &&
+        a.y + a.height > b.y      // Cambié a.h por a.height
+      );
+    }
+    
   // === PUNTUACIÓN ===
   function updateScore(puntos) {
     score += puntos;
@@ -389,7 +386,7 @@ window.addEventListener("DOMContentLoaded", () => {
       currentLevelConfig = niveles[nivelActual];
       updateNivel();
     }
-    if (nivelActual > 5) {
+    if (nivelActual === 5) {
       activarBonusStage();
     }
   }
@@ -413,45 +410,86 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 2500); // Dura 2.5 segundos
   }
 
-    function activarBonusStage() {
+  function activarBonusStage() {
     clearAllSpawners(); // detiene las nubes y chocolates
     mostrarMensajeBonus(); // muestra un texto en pantalla
   
-    // !Spawners solo de elementos positivos
-    manzanasIntervalId = setInterval(spawnManzana, 1000);
-    pollitosIntervalId = setInterval(spawnPollito, 1200);
-    brocoliIntervalId = setInterval(spawnBrocoli, 1350);
-    aceiteolivaIntervalId = setInterval(spawnAceite, 1400);
-    huevoIntervalId = setInterval(spawnHuevo, 1450);
-    pescadoIntervalId = setInterval(spawnPescado, 1500);
-    zanahoriaIntervalId = setInterval(spawnZanahoria, 1550);
-    sandiaIntervalId = setInterval(spawnSandia, 1650);
-    carnederesIntervalId = setInterval(spawnCarnederes, 1700);
-
+    // Solo elementos positivos (manzana, pollo y nuevos saludables)
+    manzanasIntervalId = setInterval(() => {
+      const y = Math.random() * (gameBoxNode.offsetHeight - 60);
+      manzanasArr.push(new Manzana(gameBoxNode, y));
+    }, 800);
   
-    // Opcional: cambiar fondo o animaciones
-    document.body.classList.add("bonus-background");
+    pollitosIntervalId = setInterval(() => {
+      const y = Math.random() * (gameBoxNode.offsetHeight - 60);
+      pollitosArr.push(new PollitoAsado(gameBoxNode, y));
+    }, 800);
   
-    // Después de X segundos termina el bonus
+    zanahoriaIntervalId = setInterval(() => {
+      const y = Math.random() * (gameBoxNode.offsetHeight - 60);
+      zanahoriasArr.push(new Zanahoria(gameBoxNode, y));
+    }, 1000);
+  
+    brocoliIntervalId = setInterval(() => {
+      const y = Math.random() * (gameBoxNode.offsetHeight - 60);
+      brocolisArr.push(new Brocoli(gameBoxNode, y));
+    }, 1000);
+  
+    aceiteolivaIntervalId = setInterval(() => {
+      const y = Math.random() * (gameBoxNode.offsetHeight - 60);
+      aceitesArr.push(new AceiteOliva(gameBoxNode, y));
+    }, 1100);
+  
+    carnederesIntervalId = setInterval(() => {
+      const y = Math.random() * (gameBoxNode.offsetHeight - 60);
+      carnederesesArr.push(new CarneDeres(gameBoxNode, y));
+    }, 1100);
+  
+    huevoIntervalId = setInterval(() => {
+      const y = Math.random() * (gameBoxNode.offsetHeight - 60);
+      huevosArr.push(new Huevo(gameBoxNode, y));
+    }, 1000);
+  
+    sandiaIntervalId = setInterval(() => {
+      const y = Math.random() * (gameBoxNode.offsetHeight - 60);
+      sandiasArr.push(new Sandia(gameBoxNode, y));
+    }, 1000);
+  
+    pescadoIntervalId = setInterval(() => {
+      const y = Math.random() * (gameBoxNode.offsetHeight - 60);
+      pescadosArr.push(new Pescado(gameBoxNode, y));
+    }, 1000);
+  
+    // Detener el bonus después de 20 segundos
     setTimeout(() => {
       clearAllSpawners();
-      ocultarMensajeBonus();
-      finalizarJuego(); // o volver al juego normal
-    }, 15000); // 15 segundos de bonus
+      iniciarSpawners(); // volver a los spawners normales
+    }, 20000);
+  }
+  
+    
+    function clearAllSpawners() {
+      clearInterval(nubesIntervalId);
+      clearInterval(pollitosIntervalId);
+      clearInterval(manzanasIntervalId);
+      clearInterval(chocolatesIntervalId);
+      clearInterval(zanahoriaIntervalId);
+      clearInterval(brocoliIntervalId);
+      clearInterval(aceiteolivaIntervalId);
+      clearInterval(carnederesIntervalId);
+      clearInterval(huevoIntervalId);
+      clearInterval(sandiaIntervalId);
+      clearInterval(pescadoIntervalId);
     }
 
     function mostrarMensajeBonus() {
-      const msg = document.createElement("div");
-      msg.innerText = "BONUS STAGE!";
-      msg.id = "bonus-msg";
-      msg.style.position = "absolute";
-      msg.style.top = "50%";
-      msg.style.left = "50%";
-      msg.style.transform = "translate(-50%, -50%)";
-      msg.style.fontSize = "48px";
-      msg.style.color = "gold";
-      msg.style.zIndex = "100";
-      document.body.appendChild(msg);
+      const levelMsgNode = document.getElementById("level-up-message");
+      levelMsgNode.innerText = `¡BONUS DE SALUD! 🥦🥩🍉`;
+      levelMsgNode.style.opacity = "1";
+    
+      setTimeout(() => {
+        levelMsgNode.style.opacity = "0";
+      }, 3000);
     }
 
     function ocultarMensajeBonus() {
@@ -488,16 +526,16 @@ window.addEventListener("DOMContentLoaded", () => {
   function endGame() {
     clearInterval(gameIntervalId);
     clearInterval(nubesIntervalId);
-    clearInterval(pollitosIntervalId);
-    clearInterval(manzanasIntervalId);
+    clearInterval(pollitosIntervalId); //alimentosaludable
+    clearInterval(manzanasIntervalId); //alimentosaludable
     clearInterval(chocolatesIntervalId);
-    clearInterval(brocoliIntervalId);
-    clearInterval(aceiteolivaIntervalId);
-    clearInterval(huevoIntervalId);
-    clearInterval(pescadoIntervalId);
-    clearInterval(zanahoriaIntervalId);
-    clearInterval(sandiaIntervalId);
-    clearInterval(carnederesIntervalId);
+    clearInterval(brocoliIntervalId); //alimentosaludable
+    clearInterval(aceiteolivaIntervalId); //alimentosaludable
+    clearInterval(huevoIntervalId); //alimentosaludable
+    clearInterval(pescadoIntervalId); //alimentosaludable
+    clearInterval(zanahoriaIntervalId); //alimentosaludable
+    clearInterval(sandiaIntervalId); //alimentosaludable
+    clearInterval(carnederesIntervalId); //alimentosaludable
 
     mostrarRanking();
 
