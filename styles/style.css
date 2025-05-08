@@ -179,6 +179,19 @@ audio {
 }
 
 /* === PANTALLA FINAL === */
+
+
+#container-end-background {
+  background-image: url("../images-fondojuego-titulo/gameover_.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid black;
+  border-radius: 2px;
+  height: 600px;
+  width: 628px;
+}
+
 #game-screen,
 #game-over-screen {
   display: none;
