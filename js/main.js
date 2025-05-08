@@ -63,6 +63,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let maxScore = 0;
   let score = 0;
   let nivelActual = 0;
+  let bonusStage = false;
   let currentLevelConfig = niveles[nivelActual];
 
   let gameIntervalId, nubesIntervalId, pollitosIntervalId, manzanasIntervalId, chocolatesIntervalId, brocoliIntervalId, aceiteolivaIntervalId, huevoIntervalId, pescadoIntervalId, zanahoriaIntervalId, sandiaIntervalId, carnederesIntervalId;
@@ -383,7 +384,8 @@ window.addEventListener("DOMContentLoaded", () => {
       currentLevelConfig = niveles[nivelActual];
       updateNivel();
     }
-    if (nivelActual === 5) {
+    if (nivelActual === 5 && !bonusStage) {
+      bonusStage = true;
       activarBonusStage();
     }
   }
