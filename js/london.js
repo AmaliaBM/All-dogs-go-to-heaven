@@ -19,14 +19,14 @@ class London {
       // === DIMENSIONES Y POSICIÓN INICIAL ===
       this.x = 50;
       this.y = 50;
-      this.w = 55;
-      this.h = 50;
+      this.width = 55;
+      this.height = 50;
   
       this.movementSpeed = 15;
   
       // === APLICAR ESTILO INICIAL AL NODO ===
-      this.node.style.width = `${this.w}px`;
-      this.node.style.height = `${this.h}px`;
+      this.node.style.width = `${this.width}px`;
+      this.node.style.height = `${this.height}px`;
       this.node.style.left = `${this.x}px`;
       this.node.style.top = `${this.y}px`;
     }
@@ -40,7 +40,7 @@ class London {
     // === MOVIMIENTO HACIA ABAJO ===
     moveDown() {
       const gameBoxHeight = this.gameBoxNode.offsetHeight;
-      this.y = Math.min(gameBoxHeight - this.h, this.y + this.movementSpeed);
+      this.y = Math.min(gameBoxHeight - this.height, this.y + this.movementSpeed);
       this.node.style.top = `${this.y}px`;
     }
   }

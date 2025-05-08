@@ -99,7 +99,7 @@ window.addEventListener("DOMContentLoaded", () => {
       musicaJuegoNode.play()
       pauseBtnNode.innerText = "⏸️ Pausa";
     }
-    });
+  });
 
   soundOnBtnDOM.addEventListener("click", () => musicaJuegoNode.play());
   soundOffBtnDOM.addEventListener("click", stopMusic);
@@ -200,13 +200,14 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function moverYLimpiar(arr) {
-    for (let i = arr.length - 1; i >= 0; i--) {
-      let obj = arr[i];
-      obj.automaticMovement();
+    arr.forEach(obj => obj.automaticMovement());
+    arr = arr.filter(obj => {
       if (obj.x + obj.width < 0) {
-        arr.splice(i, 1); // Elimina del array original
+        obj.remove();
+        return false;
       }
-    }
+      return true;
+    });
   }
   
 
@@ -233,7 +234,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function checkCollisionLondonPollitos() {
     pollitosArr = pollitosArr.filter(pollito => {
       if (colisiona(window.londonObj, pollito)) {
-        sonidoPolloNode.play();
+        sonidoComerSaludableNode.play();
         pollito.remove();
         updateScore(2);
         mostrarMensajeSalud(2, pollito.x, pollito.y);
@@ -246,7 +247,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function checkCollisionLondonManzana() {
     manzanasArr = manzanasArr.filter(manzana => {
       if (colisiona(window.londonObj, manzana)) {
-        sonidoPolloNode.play();
+        sonidoComerSaludableNode.play();
         manzana.remove();
         updateScore(1);
         mostrarMensajeSalud(1, manzana.x, manzana.y);
@@ -259,7 +260,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function checkCollisionLondonZanahoria() {
     zanahoriasArr = zanahoriasArr.filter(zanahoria => {
       if (colisiona(window.londonObj, zanahoria)) {
-        sonidoPolloNode.play();
+        sonidoComerSaludableNode.play();
         zanahoria.remove();
         updateScore(0.50);
         mostrarMensajeSalud(0.50, zanahoria.x, zanahoria.y);
@@ -272,7 +273,7 @@ window.addEventListener("DOMContentLoaded", () => {
   function checkCollisionLondonBrocoli() {
     brocolisArr = brocolisArr.filter(brocoli => {
       if (colisiona(window.londonObj, brocoli)) {
-        sonidoPolloNode.play();
+        sonidoComerSaludableNode.play();
         brocoli.remove();
         updateScore(0.50);
         mostrarMensajeSalud(0.50, brocoli.x, brocoli.y);
@@ -282,84 +283,80 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-    function checkCollisionLondonAceite() {
-      aceitesArr = aceitesArr.filter(aceite => {
-        if (colisiona(window.londonObj, aceite)) {
-          sonidoPolloNode.play();
-          aceite.remove();
-          updateScore(0.20);
-          mostrarMensajeSalud(0.20, aceite.x, aceite.y);
-          return false;
-        }
-        return true;
-      });
-    }
+  function checkCollisionLondonAceite() {
+    aceitesArr = aceitesArr.filter(aceite => {
+      if (colisiona(window.londonObj, aceite)) {
+        sonidoComerSaludableNode.play();
+        aceite.remove();
+        updateScore(0.20);
+        mostrarMensajeSalud(0.20, aceite.x, aceite.y);
+        return false;
+      }
+      return true;
+    });
+  }
 
-    function checkCollisionLondonCarnederes() {
-      carnederesesArr = carnederesesArr.filter(carnederes => {
-        if (colisiona(window.londonObj, carnederes)) {
-          sonidoPolloNode.play();
-          carnederes.remove();
-          updateScore(1);
-          mostrarMensajeSalud(1, carnederes.x, carnederes.y);
-          return false;
-        }
-        return true;
-      });
-    }
-    
-
-    function checkCollisionLondonHuevo() {
-      huevosArr = huevosArr.filter(huevo => {
-        if (colisiona(window.londonObj, huevo)) {
-          sonidoPolloNode.play();
-          huevo.remove();
-          updateScore(2);
-          mostrarMensajeSalud(2, huevo.x, huevo.y);
-          return false;
-        }
-        return true;
-      });
-    }
-
-    function checkCollisionLondonSandia() {
-      sandiasArr = sandiasArr.filter(sandia => {
-        if (colisiona(window.londonObj, sandia)) {
-          sonidoPolloNode.play();
-          sandia.remove();
-          updateScore(0.30);
-          mostrarMensajeSalud(0.30, sandia.x, sandia.y);
-          return false;
-        }
-        return true;
-      });
-    }
-
-    function checkCollisionLondonPescado() {
-      pescadosArr = pescadosArr.filter(pescado => {
-        if (colisiona(window.londonObj, pescado)) {
-          sonidoPolloNode.play();
-          pescado.remove();
-          updateScore(1);
-          mostrarMensajeSalud(1, pescado.x, pescado.y);
-          return false;
-        }
-        return true;
-      });
-    }
-
-
-
- 
+  function checkCollisionLondonCarnederes() {
+    carnederesesArr = carnederesesArr.filter(carnederes => {
+      if (colisiona(window.londonObj, carnederes)) {
+        sonidoComerSaludableNode.play();
+        carnederes.remove();
+        updateScore(1);
+        mostrarMensajeSalud(1, carnederes.x, carnederes.y);
+        return false;
+      }
+      return true;
+    });
+  }
   
-    function colisiona(a, b) {
-      return (
-        a.x < b.x + b.width &&
-        a.x + a.width > b.x &&    // Cambié a.w por a.width
-        a.y < b.y + b.height &&
-        a.y + a.height > b.y      // Cambié a.h por a.height
-      );
-    }
+
+  function checkCollisionLondonHuevo() {
+    huevosArr = huevosArr.filter(huevo => {
+      if (colisiona(window.londonObj, huevo)) {
+        sonidoComerSaludableNode.play();
+        huevo.remove();
+        updateScore(2);
+        mostrarMensajeSalud(2, huevo.x, huevo.y);
+        return false;
+      }
+      return true;
+    });
+  }
+
+  function checkCollisionLondonSandia() {
+    sandiasArr = sandiasArr.filter(sandia => {
+      if (colisiona(window.londonObj, sandia)) {
+        sonidoComerSaludableNode.play();
+        sandia.remove();
+        updateScore(0.30);
+        mostrarMensajeSalud(0.30, sandia.x, sandia.y);
+        return false;
+      }
+      return true;
+    });
+  }
+
+  function checkCollisionLondonPescado() {
+    pescadosArr = pescadosArr.filter(pescado => {
+      if (colisiona(window.londonObj, pescado)) {
+        sonidoComerSaludableNode.play();
+        pescado.remove();
+        updateScore(1);
+        mostrarMensajeSalud(1, pescado.x, pescado.y);
+        return false;
+      }
+      return true;
+    });
+  }
+  
+  function colisiona(a, b) {
+    return (
+      a.x < b.x + b.width &&
+      a.x + a.width > b.x &&
+      a.y < b.y + b.height &&
+      a.y + a.height > b.y
+    );
+  }
     
   // === PUNTUACIÓN ===
   function updateScore(puntos) {
@@ -468,34 +465,34 @@ window.addEventListener("DOMContentLoaded", () => {
   }
   
     
-    function clearAllSpawners() {
-      clearInterval(nubesIntervalId);
-      clearInterval(pollitosIntervalId);
-      clearInterval(manzanasIntervalId);
-      clearInterval(chocolatesIntervalId);
-      clearInterval(zanahoriaIntervalId);
-      clearInterval(brocoliIntervalId);
-      clearInterval(aceiteolivaIntervalId);
-      clearInterval(carnederesIntervalId);
-      clearInterval(huevoIntervalId);
-      clearInterval(sandiaIntervalId);
-      clearInterval(pescadoIntervalId);
-    }
+  function clearAllSpawners() {
+    clearInterval(nubesIntervalId);
+    clearInterval(pollitosIntervalId);
+    clearInterval(manzanasIntervalId);
+    clearInterval(chocolatesIntervalId);
+    clearInterval(zanahoriaIntervalId);
+    clearInterval(brocoliIntervalId);
+    clearInterval(aceiteolivaIntervalId);
+    clearInterval(carnederesIntervalId);
+    clearInterval(huevoIntervalId);
+    clearInterval(sandiaIntervalId);
+    clearInterval(pescadoIntervalId);
+  }
 
-    function mostrarMensajeBonus() {
-      const levelMsgNode = document.getElementById("level-up-message");
-      levelMsgNode.innerText = `¡BONUS DE SALUD! 🥦🥩🍉`;
-      levelMsgNode.style.opacity = "1";
-    
-      setTimeout(() => {
-        levelMsgNode.style.opacity = "0";
-      }, 3000);
-    }
+  function mostrarMensajeBonus() {
+    const levelMsgNode = document.getElementById("level-up-message");
+    levelMsgNode.innerText = `¡BONUS DE SALUD! 🥦🥩🍉`;
+    levelMsgNode.style.opacity = "1";
+  
+    setTimeout(() => {
+      levelMsgNode.style.opacity = "0";
+    }, 3000);
+  }
 
-    function ocultarMensajeBonus() {
-      const msg = document.getElementById("bonus-msg");
-      if (msg) msg.remove();
-    }
+  function ocultarMensajeBonus() {
+    const msg = document.getElementById("bonus-msg");
+    if (msg) msg.remove();
+  }
 
   
   function mostrarMensajeSalud(puntosGanados, x = window.innerWidth / 2, y = 100) {
@@ -522,6 +519,7 @@ window.addEventListener("DOMContentLoaded", () => {
       mensaje.remove();
     }, 1100);
   }
+
   // === FINAL DEL JUEGO ===
   function endGame() {
     clearInterval(gameIntervalId);
