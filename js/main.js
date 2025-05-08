@@ -378,7 +378,7 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function checkNivel() {
-    const siguiente = niveles[nivelActual + 1];
+     const siguiente = niveles[nivelActual + 1];
     if (siguiente && score >= siguiente.puntosParaPasar) {
       nivelActual++;
       currentLevelConfig = niveles[nivelActual];
@@ -461,6 +461,7 @@ window.addEventListener("DOMContentLoaded", () => {
   
     // Detener el bonus después de 20 segundos
     setTimeout(() => {
+      bonusStage = false;
       clearAllSpawners();
       iniciarSpawners(); // volver a los spawners normales
     }, 20000);
@@ -484,17 +485,17 @@ window.addEventListener("DOMContentLoaded", () => {
   function mostrarMensajeBonus() {
     const levelMsgNode = document.getElementById("level-up-message");
     levelMsgNode.innerText = `¡BONUS DE SALUD! 🥦🥩🍉`;
-    levelMsgNode.style.opacity = "1";
+    levelMsgNode.style.opacity = "0.8";
   
     setTimeout(() => {
       levelMsgNode.style.opacity = "0";
     }, 3000);
   }
 
-  function ocultarMensajeBonus() {
+  /*function ocultarMensajeBonus() {
     const msg = document.getElementById("bonus-msg");
     if (msg) msg.remove();
-  }
+  }*/
 
   
   function mostrarMensajeSalud(puntosGanados, x = window.innerWidth / 2, y = 100) {
@@ -503,8 +504,10 @@ window.addEventListener("DOMContentLoaded", () => {
     mensaje.style.position = "absolute";
     mensaje.style.left = `${x}px`;
     mensaje.style.top = `${y}px`;
-    mensaje.style.transform = "translate(-50%, 0)";
-    mensaje.style.color = "#4CAF50";
+    mensaje.style.transform = "translate(-50%, 0,)";
+    mensaje.style.color = "#009f48 ";
+    mensaje.style.border = "0.50px solid #009f48"; 
+    mensaje.style.borderRadius = "8px";
     mensaje.style.fontWeight = "bold";
     mensaje.style.fontSize = "20px";
     mensaje.style.opacity = 1;
@@ -543,7 +546,7 @@ window.addEventListener("DOMContentLoaded", () => {
     gameBoxNode.style.display = "none";
     gameOverScreenNode.style.display = "flex";
 
-    scoreGameOverNode.innerText = `Tu puntuación final: ${score}`;
+    scoreGameOverNode.innerText = `Tu puntuación final: ${score.toFixed(2)}`;
     document.querySelector("#player-name-gameover").innerText = `¡Hola ${playerName}!`;
   }
 
@@ -562,7 +565,7 @@ window.addEventListener("DOMContentLoaded", () => {
     rankingList.innerHTML = "";
     maxScores.slice(0, 5).forEach(p => {
       const li = document.createElement("li");
-      li.innerText = `${p.name}: ${p.score} puntos`;
+      li.innerText = `${p.name}: ${p.score.toFixed(2)} puntos`;
       rankingList.appendChild(li);
     });
   }

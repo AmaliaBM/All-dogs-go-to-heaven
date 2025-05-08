@@ -39,12 +39,14 @@
 
   <!-- PANTALLA DE JUEGO -->
   <div id="game-screen" class="container" style="display: none;">
-    <div id="game-box"></div>
+    <div id="game-box">
+    <div id="mensajes-salud" style="position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 999;"></div>
+      </div>
     <button id="pause-btn">⏸️ Pausa</button>
     <div id="level-up-message" class="level-up-message"></div>
+    
   </div>
-  <div id="mensajes-salud" style="position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; z-index: 999;"></div>
-
+  
   <!-- PANTALLA FINAL -->
   <div id="game-over-screen" class="container" style="display: none;">
     <p id="player-name-gameover"></p>
@@ -76,5 +78,6 @@
   <script src="./js/aceiteoliva.js"></script>
   <script src="./js/carnederes.js"></script>
 
+  
 </body>
 </html>

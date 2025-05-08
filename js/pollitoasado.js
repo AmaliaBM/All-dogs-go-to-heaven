@@ -17,8 +17,8 @@ class PollitoAsado {
       this.node.style.position = "absolute";
   
       // === DIMENSIONES Y POSICIÓN INICIAL ===
-      this.width = 40;
-      this.height = 30;
+      this.width = 50;
+      this.height = 40;
       this.x = this.gameBoxNode.offsetWidth;
       this.y = posY;
       this.speed = 2.5;

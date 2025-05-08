@@ -1,4 +1,4 @@
-class Aceite {
+class AceiteOliva {
     /*
       Clase Aceite:
       - Aparece desde la derecha y se desplaza hacia la izquierda.
@@ -17,7 +17,7 @@ class Aceite {
   
       // === DIMENSIONES Y POSICIÓN INICIAL ===
       this.width = 20;
-      this.height = 20;
+      this.height = 30;
       this.x = this.gameBoxNode.offsetWidth;
       this.y = posY;
       this.speed = 2;

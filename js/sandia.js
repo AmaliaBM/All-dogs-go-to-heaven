@@ -15,8 +15,8 @@ class Sandia {
       this.node.style.position = "absolute";
   
       // === DIMENSIONES Y POSICIÓN INICIAL ===
-      this.width = 20;
-      this.height = 20;
+      this.width = 60;
+      this.height = 60;
       this.x = this.gameBoxNode.offsetWidth;
       this.y = posY;
       this.speed = 2;

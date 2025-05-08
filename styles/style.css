@@ -1,7 +1,7 @@
 /* === ESTILOS GENERALES === */
 body {
   margin: 0;
-  background-color: #fff;
+  background-image: url("../images-fondojuego-titulo/fondo-abstracto-con-textura.jpg"); 
   overflow-x: hidden;
   font-family: sans-serif;
 }
@@ -23,7 +23,7 @@ audio {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: gold;
+  background-color: #ffd700, 0.8;
   color: black;
   padding: 20px 40px;
   border-radius: 15px;
@@ -51,7 +51,7 @@ audio {
 }
 
 #splash-screen img {
-  border: 10px solid blue;
+  border: 10px solid #0083ff;
   border-radius: 15px;
   max-width: 90%;
 }
@@ -71,7 +71,7 @@ audio {
 }
 
 #start-btn {
-  background-color: rgb(33, 59, 228);
+  background-color: rgba(0, 131, 255, 0.8);
   color: white;
   padding: 20px;
   font-size: 20px;
@@ -79,7 +79,13 @@ audio {
   margin-top: 0;
   border: none;
   cursor: pointer;
+  transition: background-color 0.4s ease;
 }
+
+#start-btn:hover {
+  background-color: rgba(0, 131, 255, 1); /* Azul más intenso al pasar el puntero */
+}
+
 
 #mobile-warning {
   display: none;
@@ -125,11 +131,16 @@ audio {
   position: relative;
   overflow: hidden;
   user-select: none;
-  background-image: url("../images-fondojuego-titulo/nubes-fondo.png");
+  border-width: 4px;
+  border-style: solid;
+  border-radius: 10px; 
+  border-color: #0083ff;
+  background-image: url("../images-fondojuego-titulo/nubes-fondo-40_.png");
   background-position: top;
   background-size: cover;
   touch-action: none;
 }
+
 
 #game-box * {
   pointer-events: none;
@@ -137,7 +148,7 @@ audio {
 
 /* === BONUS NIVEL 5 ===*/
 .bonus-background {
-  background-color: #fdf6b2; /* un color claro o animación */
+  background-color: #fdf6b2, 0.80; /* un color claro o animación*/ 
   transition: background-color 0.5s;
 }
 
@@ -151,6 +162,10 @@ audio {
   margin-top: 10px;
   cursor: pointer;
   border: none;
+}
+
+#pause-btn:hover {
+  background-color: rgb(0, 87, 168); /* Azul más intenso al pasar el puntero */
 }
 
 /* === SCOREBOARD === */
@@ -180,15 +195,21 @@ audio {
 }
 
 #restart-btn {
-  background-color: rgb(0, 123, 255);
+  background-color: rgba(0, 131, 255, 0.8);
   color: white;
-  padding: 15px;
-  font-size: 18px;
-  margin-top: 20px;
+  padding: 20px;
+  font-size: 20px;
   border-radius: 10px;
+  margin-top: 0;
   border: none;
   cursor: pointer;
+  transition: background-color 0.4s ease;
 }
+
+#restart-btn:hover {
+  background-color: rgba(0, 131, 255, 1); /* Azul más intenso al pasar el puntero */
+}
+
 
 /* === BOTONES DE SONIDO === */
 #botonesOnOff {
