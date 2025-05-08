@@ -21,8 +21,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // === SONIDOS ===
   const musicaJuegoNode = document.querySelector("#musicajuego");
   const musicaColisionNode = document.querySelector("#musicacolision");
-  const sonidoPolloNode = document.querySelector("#sonidocomerpollo");
-  const sonidoManzanaNode = document.querySelector("#sonidocomerpollo");
+  const sonidoComerSaludableNode = document.querySelector("#sonidocomersaludable");
  
   musicaJuegoNode.volume = 0.1;
   musicaJuegoNode.addEventListener("ended", function () {
@@ -31,8 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   musicaColisionNode.volume = 0.5;
-  sonidoPolloNode.volume = 0.5;
-  sonidoManzanaNode.volume = 0.5;
+  sonidoComerSaludableNode.volume = 0.5;
 
   const stopMusic = () => musicaJuegoNode.pause();
 
@@ -43,6 +41,7 @@ window.addEventListener("DOMContentLoaded", () => {
     { nivel: 3, puntosParaPasar: 20, velocidadNubes: 2500, velocidadPollitos: 1400 },
     { nivel: 4, puntosParaPasar: 30, velocidadNubes: 3000, velocidadPollitos: 1700 },
     { nivel: 5, puntosParaPasar: 40, velocidadNubes: 3500,  velocidadPollitos: 2000 },
+    { nivel: 6, puntosParaPasar: 50, velocidadNubes: 3500,  velocidadPollitos: 2000 },
   ];
   
 
@@ -52,6 +51,13 @@ window.addEventListener("DOMContentLoaded", () => {
   let manzanasArr = [];
   let nubesArr = [];
   let chocolatesArr = [];
+  let zanahoriasArr = [];
+  let brocolisArr = [];
+  let aceitesArr = [];
+  let carnederesesArr = [];
+  let huevosArr = [];
+  let sandiasArr = [];
+  let pescadosArr = [];
 
   let playerName = "";
   let maxScore = 0;
@@ -59,7 +65,7 @@ window.addEventListener("DOMContentLoaded", () => {
   let nivelActual = 0;
   let currentLevelConfig = niveles[nivelActual];
 
-  let gameIntervalId, nubesIntervalId, pollitosIntervalId, manzanasIntervalId, chocolatesIntervalId;
+  let gameIntervalId, nubesIntervalId, pollitosIntervalId, manzanasIntervalId, chocolatesIntervalId, brocoliIntervalId, aceiteolivaIntervalId, huevoIntervalId, pescadoIntervalId, zanahoriaIntervalId, sandiaIntervalId, carnederesIntervalId;
 
   // === CARGAR PUNTUACIÓN MÁXIMA ===
   const savedData = JSON.parse(localStorage.getItem("maxScores")) || [];
@@ -155,7 +161,7 @@ window.addEventListener("DOMContentLoaded", () => {
       manzanasArr.push(new Manzana(gameBoxNode, y));
     }, 3700);
 
-     // Solo en el nivel 2 (índice 1)
+     // Solo en el nivel 2
      if (nivelActual >= 1) {
       chocolatesIntervalId = setInterval(() => {
         const y = Math.random() * (gameBoxNode.offsetHeight - 50);
@@ -171,12 +177,26 @@ window.addEventListener("DOMContentLoaded", () => {
     moverYLimpiar(nubesArr);
     moverYLimpiar(pollitosArr);
     moverYLimpiar(manzanasArr);
-    moverYLimpiar(chocolatesArr)
+    moverYLimpiar(chocolatesArr);
+    moverYLimpiar(zanahoriasArr);
+    moverYLimpiar(brocolisArr);
+    moverYLimpiar(aceitesArr);
+    moverYLimpiar(carnederesesArr);
+    moverYLimpiar(huevosArr);
+    moverYLimpiar(sandiasArr);
+    moverYLimpiar(pescadosArr);
 
     checkCollisionLondonNubes();
     checkCollisionLondonPollitos();
     checkCollisionLondonManzana();
     checkCollisionLondonChocolate();
+    checkCollisionLondonZanahoria();
+    checkCollisionLondonBrocoli();
+    checkCollisionLondonAceite();
+    checkCollisionLondonCarnederes();
+    checkCollisionLondonHuevo();
+    checkCollisionLondonSandia();
+    checkCollisionLondonPescado();
   }
 
   function moverYLimpiar(arr) {
@@ -234,6 +254,103 @@ window.addEventListener("DOMContentLoaded", () => {
       }
       return true;
     });
+  }
+
+  function checkCollisionLondonZanahoria() {
+    zanahoriasArr = zanahoriasArr.filter(zanahoria => {
+      if (colisiona(window.londonObj, zanahoria)) {
+        sonidoPolloNode.play();
+        zanahoria.remove();
+        updateScore(0.50);
+        mostrarMensajeSalud(0.50, zanahoria.x, zanahoria.y);
+        return false;
+      }
+      return true;
+    });
+  }
+
+  function checkCollisionLondonBrocoli() {
+    brocolisArr = brocolisArr.filter(brocoli => {
+      if (colisiona(window.londonObj, brocoli)) {
+        sonidoPolloNode.play();
+        brocoli.remove();
+        updateScore(0.50);
+        mostrarMensajeSalud(0.50, brocoli.x, brocoli.y);
+        return false;
+      }
+      return true;
+    });
+
+    function checkCollisionLondonAceite() {
+      aceitesArr = aceitesArr.filter(aceite => {
+        if (colisiona(window.londonObj, aceite)) {
+          sonidoPolloNode.play();
+          aceite.remove();
+          updateScore(0.20);
+          mostrarMensajeSalud(0.20, aceite.x, aceite.y);
+          return false;
+        }
+        return true;
+      });
+    }
+
+    function checkCollisionLondonCarnederes() {
+      carnederesesArr = carnederesesArr.filter(carnederes => {
+        if (colisiona(window.londonObj, carnederes)) {
+          sonidoPolloNode.play();
+          carnederes.remove();
+          updateScore(1);
+          mostrarMensajeSalud(1, carnederes.x, carnederes.y);
+          return false;
+        }
+        return true;
+      });
+    }
+    
+
+    function checkCollisionLondonHuevo() {
+      huevosArr = huevosArr.filter(huevo => {
+        if (colisiona(window.londonObj, huevo)) {
+          sonidoPolloNode.play();
+          huevo.remove();
+          updateScore(2);
+          mostrarMensajeSalud(2, huevo.x, huevo.y);
+          return false;
+        }
+        return true;
+      });
+    }
+
+    function checkCollisionLondonSandia() {
+      sandiasArr = sandiasArr.filter(sandia => {
+        if (colisiona(window.londonObj, sandia)) {
+          sonidoPolloNode.play();
+          sandia.remove();
+          updateScore(0.30);
+          mostrarMensajeSalud(0.30, sandia.x, sandia.y);
+          return false;
+        }
+        return true;
+      });
+    }
+
+    function checkCollisionLondonPescado() {
+      pescadosArr = pescadosArr.filter(pescado => {
+        if (colisiona(window.londonObj, pescado)) {
+          sonidoPolloNode.play();
+          pescado.remove();
+          updateScore(1);
+          mostrarMensajeSalud(1, pescado.x, pescado.y);
+          return false;
+        }
+        return true;
+      });
+    }
+
+
+
+
+
   }
 
  
@@ -303,6 +420,14 @@ window.addEventListener("DOMContentLoaded", () => {
     // !Spawners solo de elementos positivos
     manzanasIntervalId = setInterval(spawnManzana, 1000);
     pollitosIntervalId = setInterval(spawnPollito, 1200);
+    brocoliIntervalId = setInterval(spawnBrocoli, 1350);
+    aceiteolivaIntervalId = setInterval(spawnAceite, 1400);
+    huevoIntervalId = setInterval(spawnHuevo, 1450);
+    pescadoIntervalId = setInterval(spawnPescado, 1500);
+    zanahoriaIntervalId = setInterval(spawnZanahoria, 1550);
+    sandiaIntervalId = setInterval(spawnSandia, 1650);
+    carnederesIntervalId = setInterval(spawnCarnederes, 1700);
+
   
     // Opcional: cambiar fondo o animaciones
     document.body.classList.add("bonus-background");
@@ -366,6 +491,13 @@ window.addEventListener("DOMContentLoaded", () => {
     clearInterval(pollitosIntervalId);
     clearInterval(manzanasIntervalId);
     clearInterval(chocolatesIntervalId);
+    clearInterval(brocoliIntervalId);
+    clearInterval(aceiteolivaIntervalId);
+    clearInterval(huevoIntervalId);
+    clearInterval(pescadoIntervalId);
+    clearInterval(zanahoriaIntervalId);
+    clearInterval(sandiaIntervalId);
+    clearInterval(carnederesIntervalId);
 
     mostrarRanking();
 

@@ -135,6 +135,12 @@ audio {
   pointer-events: none;
 }
 
+/* === BONUS NIVEL 5 ===*/
+.bonus-background {
+  background-color: #fdf6b2; /* un color claro o animación */
+  transition: background-color 0.5s;
+}
+
 /* === BOTÓN DE PAUSA === */
 #pause-btn {
   background-color: rgb(64, 142, 231);
