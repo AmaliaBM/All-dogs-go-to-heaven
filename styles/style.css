@@ -16,6 +16,18 @@ audio {
   justify-content: center;
   align-items: center;
   margin: 50px;
+  width: 800px;
+  height: 744px;
+  margin: auto;
+  background-size: cover;
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .level-up-message {
@@ -36,38 +48,16 @@ audio {
 }
 
 /* === PANTALLA DE INICIO === */
-#splash-screen {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 500px;
-  background-size: cover;
-  overflow: hidden;
-  text-align: center;
-  padding: 20px;
-}
 
-#splash-screen img {
-  border: 10px solid #0083ff;
-  border-radius: 15px;
-  max-width: 90%;
-}
-
-#splash-screen::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 500px;
-  background-image: url("../images-fondojuego-titulo/nubes-fondo.png");
-  background-size: cover;
-  opacity: 0.15;
-  z-index: -1;
+#containerbackground {
+  background-image: url("../images-fondojuego-titulo/fondoinicio.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 1px solid black;
+  border-radius: 2px;
+  height: 600px;
+  width: 628px;
 }
 
 #start-btn {
@@ -170,7 +160,7 @@ audio {
 
 /* === SCOREBOARD === */
 #score-board {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   gap: 25px;
@@ -213,7 +203,7 @@ audio {
 
 /* === BOTONES DE SONIDO === */
 #botonesOnOff {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   gap: 5px;

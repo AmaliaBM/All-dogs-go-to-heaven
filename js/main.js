@@ -17,6 +17,8 @@ window.addEventListener("DOMContentLoaded", () => {
   const soundOnBtnDOM = document.querySelector("#soundOn-btn");
   const soundOffBtnDOM = document.querySelector("#soundOff-btn");
   const gameBoxNode = document.querySelector("#game-box");
+  const scoreboardNode = document.querySelector("#score-board");
+  const botonesOnOffNode = document.querySelector("#botonesOnOff");
 
   // === SONIDOS ===
   const musicaJuegoNode = document.querySelector("#musicajuego");
@@ -128,6 +130,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // === INICIO DEL JUEGO ===
   function startGame() {
+    scoreboardNode.style.display = "flex";
+    botonesOnOffNode.style.display = "flex";
     score = 0;
     scoreNode.innerText = score;
     musicaJuegoNode.play();

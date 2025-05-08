@@ -28,10 +28,12 @@
 
   <!-- PANTALLA DE INICIO -->
   <div id="splash-screen" class="container">
-    <img src="./images-fondojuego-titulo/titulo-juego.png" width="500" alt="Logo del juego: All dogs go to heaven" />
-    <p>Introduce tu nombre para empezar</p>
-    <input type="text" id="player-name-input" placeholder="Ingresa tu nombre" />
-    <button id="start-btn">Play!</button>
+    <div id="containerbackground"> </div>
+    <div id="containerboton">
+      <p>Introduce tu nombre para empezar</p>
+      <input type="text" id="player-name-input" placeholder="Ingresa tu nombre" />
+      <button id="start-btn">Play!</button>
+    </div>
   </div>
   <div id="mobile-warning">
     <p>Este juego no está disponible para móviles. Por favor, ábrelo desde un ordenador 💻</p>
@@ -52,7 +54,7 @@
     <p id="player-name-gameover"></p>
     <p id="score-gameover"></p>
     <p id="max-score-gameover"></p>
-    <img src="./images-fondojuego-titulo/Lo-has-hecho-bastante-bien.png" width="500" alt="Pantalla final: lo has hecho bien" />
+    <img src="./images-fondojuego-titulo/gameover_.png" alt="GameOver" />
     <h3>🏆 Ranking de Mejores Jugadores</h3>
     <ol id="ranking-list"></ol>
     <button id="restart-btn">Volver a jugar</button>
@@ -78,6 +80,6 @@
   <script src="./js/aceiteoliva.js"></script>
   <script src="./js/carnederes.js"></script>
 
-  
+
 </body>
 </html>
