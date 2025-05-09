@@ -1,7 +1,7 @@
 class Pescado {
     /*
       - Aparece desde la derecha y se desplaza hacia la izquierda.
-      - Aparece solo en el momento bonus, con todos los demás alimentos saludables (no nocivos)
+      - Aparece solo en el momento bonus, con todos los demás alimentos saludables extras (no nocivos)
     */
   
     constructor(gameBoxNode, posY) {

@@ -496,12 +496,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   }
 
-  /*function ocultarMensajeBonus() {
-    const msg = document.getElementById("bonus-msg");
-    if (msg) msg.remove();
-  }*/
-
-  
   function mostrarMensajeSalud(puntosGanados, x = window.innerWidth / 2, y = 100) {
     const mensaje = document.createElement("div");
     mensaje.textContent = `¡+${puntosGanados} en salud!`;
