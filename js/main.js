@@ -142,7 +142,7 @@ window.addEventListener("DOMContentLoaded", () => {
     iniciarSpawners();
   }
 
-  function iniciarSpawners() { //un spawner es un componente que se encarga de generar (o "spawnear") objetos o enemigos en la escena en ciertos intervalos de tiempo o bajo ciertas condiciones
+  function iniciarSpawners() { //spawner es un componente que se encarga de generar (o "spawnear") objetos en la escena en ciertos intervalos de tiempo.
 
       nubesIntervalId = setInterval(() => {
       const y = Math.random() * (gameBoxNode.offsetHeight - 100);
@@ -381,6 +381,7 @@ window.addEventListener("DOMContentLoaded", () => {
     checkNivel();
   }
 
+  // === SUBIR DE NIVEL ===
   function checkNivel() {
      const siguiente = niveles[nivelActual + 1];
     if (siguiente && score >= siguiente.puntosParaPasar) {
@@ -412,6 +413,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 2500); // Dura 2.5 segundos
   }
 
+  // === BONUS STAGE EN NIVEL 5 ===
   function activarBonusStage() {
     clearAllSpawners(); // detiene las nubes y chocolates
     mostrarMensajeBonus(); // muestra un texto en pantalla
