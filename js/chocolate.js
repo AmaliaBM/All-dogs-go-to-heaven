@@ -12,7 +12,7 @@ class Chocolate {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./elementos-comida-y-botones/chocolate.png";
+      this.node.src = "./elementos-comida-y-botones/chocolate-bailongo.png";
       this.node.style.zIndex = 20;
       this.node.style.position = "absolute";
   
