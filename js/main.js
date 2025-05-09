@@ -142,7 +142,7 @@ window.addEventListener("DOMContentLoaded", () => {
     iniciarSpawners();
   }
 
-  function iniciarSpawners() {
+  function iniciarSpawners() { //un spawner es un componente que se encarga de generar (o "spawnear") objetos o enemigos en la escena en ciertos intervalos de tiempo o bajo ciertas condiciones
 
       nubesIntervalId = setInterval(() => {
       const y = Math.random() * (gameBoxNode.offsetHeight - 100);
@@ -166,7 +166,7 @@ window.addEventListener("DOMContentLoaded", () => {
       manzanasArr.push(new Manzana(gameBoxNode, y));
     }, 3700);
 
-     // Solo en el nivel 2
+     // Solo en el nivel 2 chocolate bailongo
      if (nivelActual >= 1) {
       chocolatesIntervalId = setInterval(() => {
         const y = Math.random() * (gameBoxNode.offsetHeight - 50);
@@ -399,7 +399,6 @@ window.addEventListener("DOMContentLoaded", () => {
     clearInterval(pollitosIntervalId);
     clearInterval(chocolatesIntervalId);
     iniciarSpawners();
-    console.log(`LEVEL ${nivelActual + 1} REACHED`);
     showLevelUpMessage(nivelActual + 1);
   }
 

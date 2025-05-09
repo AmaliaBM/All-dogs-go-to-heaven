@@ -1,7 +1,7 @@
 /* === ESTILOS GENERALES === */
 body {
   margin: 0;
-  background-image: url("../images-fondojuego-titulo/fondo-abstracto-con-textura.jpg"); 
+  background-image: url("../fondos/fondo-abstracto-con-textura.jpg"); 
   overflow-x: hidden;
   font-family: sans-serif;
 }
@@ -50,7 +50,7 @@ audio {
 /* === PANTALLA DE INICIO === */
 
 #containerbackground {
-  background-image: url("../images-fondojuego-titulo/fondoinicio.png");
+  background-image: url("../fondos/fondoinicio.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -127,7 +127,7 @@ audio {
   border-style: solid;
   border-radius: 10px; 
   border-color: #1e1e1e;
-  background-image: url("../images-fondojuego-titulo/nubes-fondo-40_.png");
+  background-image: url("../fondos/nubes-fondo-40_.png");
   background-position: top;
   background-size: cover;
   touch-action: none;
@@ -205,7 +205,7 @@ audio {
 
 
 #container-end-background {
-  background-image: url("../images-fondojuego-titulo/gameover_.png");
+  background-image: url("../fondos/gameover_.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
