@@ -82,4 +82,4 @@ Negative elements:
 [Link](www.your-slides-url-here.com)
 
 ## Deploy
-[Link](https://amaliabm.github.io/All-dogs-go-to-heaven/)# All-dogs-go-to-heaven
+[Link](https://amaliabm.github.io/All-dogs-go-to-heaven/) All-dogs-go-to-heaven
