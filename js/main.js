@@ -82,7 +82,7 @@ window.addEventListener("DOMContentLoaded", () => {
   // === EVENTOS DE BOTONES ===
   startBtnNode.addEventListener("click", () => {
     const name = playerNameInput.value.trim();
-    if (!name) return alert("Por favor, ingresa tu nombre.");
+    if (!name) return alert("Type your name!");
     playerName = name;
     splashScreenNode.style.display = "none";
     gameScreenNode.style.display = "flex";
@@ -97,7 +97,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     if (window.isPaused){
       musicaJuegoNode.pause()
-      pauseBtnNode.innerText = "▶️ Reanudar";
+      pauseBtnNode.innerText = "▶️ Play";
     } else {
       musicaJuegoNode.play()
       pauseBtnNode.innerText = "⏸️ Pausa";
@@ -370,7 +370,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     if (score > maxScore) {
       maxScore = score;
-      maxScoreNode.innerText = `Máxima puntuación en salud: ${maxScore} (${playerName})`;
+      maxScoreNode.innerText = `Top health score: ${maxScore} (${playerName})`;
       const maxScores = JSON.parse(localStorage.getItem("maxScores")) || [];
       const existing = maxScores.find(p => p.name === playerName);
       if (existing) existing.score = maxScore;
@@ -399,13 +399,13 @@ window.addEventListener("DOMContentLoaded", () => {
     clearInterval(pollitosIntervalId);
     clearInterval(chocolatesIntervalId);
     iniciarSpawners();
-    console.log(`¡Nivel ${nivelActual + 1} alcanzado!`);
+    console.log(`LEVEL ${nivelActual + 1} REACHED`);
     showLevelUpMessage(nivelActual + 1);
   }
 
   function showLevelUpMessage(nivel) {
     const levelMsgNode = document.getElementById("level-up-message");
-    levelMsgNode.innerText = `¡Nivel ${nivel} alcanzado! 🔥`;
+    levelMsgNode.innerText = `🔥LEVEL ${nivel}🔥`;
     levelMsgNode.style.opacity = "1";
   
     setTimeout(() => {
@@ -488,7 +488,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function mostrarMensajeBonus() {
     const levelMsgNode = document.getElementById("level-up-message");
-    levelMsgNode.innerText = `¡BONUS DE SALUD! 🥦🥩🍉`;
+    levelMsgNode.innerText = `🥕🐟HEALTH BOOST🥦🥩`;
     levelMsgNode.style.opacity = "0.8";
   
     setTimeout(() => {
@@ -498,7 +498,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function mostrarMensajeSalud(puntosGanados, x = window.innerWidth / 2, y = 100) {
     const mensaje = document.createElement("div");
-    mensaje.textContent = `¡+${puntosGanados} en salud!`;
+    mensaje.textContent = `+${puntosGanados} heath points gained!!`;
     mensaje.style.position = "absolute";
     mensaje.style.left = `${x}px`;
     mensaje.style.top = `${y}px`;
@@ -544,8 +544,8 @@ window.addEventListener("DOMContentLoaded", () => {
     gameBoxNode.style.display = "none";
     gameOverScreenNode.style.display = "flex";
 
-    scoreGameOverNode.innerText = `Tu puntuación final: ${score.toFixed(2)}`;
-    document.querySelector("#player-name-gameover").innerText = `¡Hola ${playerName}!`;
+    scoreGameOverNode.innerText = `Your healthy point total: ${score.toFixed(2)}👏`;
+    document.querySelector("#player-name-gameover").innerText = `Hello ${playerName}, Thanks for playing 'All Dogs Go to Heaven', we hope you enjoyed the journey💚`;
   }
 
   // === RANKING ===
@@ -563,7 +563,7 @@ window.addEventListener("DOMContentLoaded", () => {
     rankingList.innerHTML = "";
     maxScores.slice(0, 5).forEach(p => {
       const li = document.createElement("li");
-      li.innerText = `${p.name}: ${p.score.toFixed(2)} puntos`;
+      li.innerText = `🏅${p.name}: ${p.score.toFixed(2)} healthy point total`;
       rankingList.appendChild(li);
     });
   }
