@@ -44,31 +44,31 @@ The game takes place in the sky, where the main character, London, must avoid cr
 
 # States
 
-Inicio del juego - Splash Screen → Game Start - Splash Screen
-Pantalla donde se juega - Game Screen → Main Gameplay - Game Screen
-Pantalla game-over - Game Over → Game Over Screen
+Splash Screen → Game Start 
+Game Screen → Main Gameplay - Game Screen
+Game Over → Game Over Screen
 
 # Proyect Structure
 
-ain.js: Contiene la estructura principal del juego, incluyendo la manipulación del DOM, sonidos, configuración de niveles, variables del juego, puntuación, eventos de botones y de interacción con el personaje. También gestiona el inicio del juego, los spawners (como las nubes), el gameloop, colisiones, puntuación final, rankings y la fase del Bonus Stage en el nivel 5. Además, incluye funciones para mostrar mensajes en pantalla durante las colisiones o al terminar el juego.
+Main.js: Contains the main structure of the game, including DOM manipulation, sounds, level configuration, game variables, scoring, button events, and character interactions. It also manages game start, spawners (like clouds), the game loop, collisions, final score, rankings, and the Bonus Stage in level 5. Additionally, it includes functions to display messages on screen during collisions or when the game ends.
 
-London.js: Define al personaje principal, su imagen, movimientos, tamaño y dimensiones.
+London.js: Defines the main character, including its image, movements, size, and dimensions.
 
-Alimentos saludables:
+Healthy foods:
 
-    pollitoasado.js: Define la importancia del pollito asado en el juego, su imagen, movimiento, tamaño, aparición y la manipulación del DOM.
+    pollitoasado.js: Defines the importance of roasted chicken in the game, its image, movement, size, appearance, and DOM manipulation.
 
-    manzana.js: Similar a pollitoasado.js, pero con variaciones en tamaño y tiempo de aparición para evitar solapamientos.
+    manzana.js: Similar to pollitoasado.js, but with variations in size and appearance timing to reduce overlap.
 
-Alimentos en el Bonus Stage:
+Bonus Stage foods:
 
-    .js: Archivos que gestionan otros alimentos saludables en el Bonus Stage, con tamaño variable. Su aparición se activa por 20 segundos en main.js, aunque el solapamiento puede mejorarse.
+    .js: Files that manage additional healthy foods during the Bonus Stage, with varying sizes. Their appearance is triggered for 20 seconds in main.js, though the overlap could be improved.
 
-Elementos negativos:
+Negative elements:
 
-    nubes.js: Define la aparición, imagen, movimiento y velocidad de las nubes, con un tamaño variable que afecta su comportamiento en pantalla.
+    nubes.js: Defines the appearance, image, movement, and speed of clouds, with variable size that affects their behavior on screen.
 
-    chocolate.js: Define la aparición y función del chocolate, un elemento negativo que causa "game over" al colisionar. Su movimiento es en zigzag, diferenciándose de otros elementos negativos.
+    chocolate.js: Defines the appearance and function of chocolate, a negative item that causes "game over" upon collision. Its zigzag movement makes it distinct from other negative elements.
 
 
 
