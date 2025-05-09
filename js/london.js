@@ -12,7 +12,7 @@ class London {
   
       // === CREACIÓN DEL NODO DE LONDON ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/London-8bits.png";
+      this.node.src = "./elementos-comida-y-botones/London-8bits.png";
       this.node.style.position = "absolute";
       this.gameBoxNode.append(this.node);
   

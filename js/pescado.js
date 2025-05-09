@@ -10,7 +10,7 @@ class Pescado {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/pescado.png";
+      this.node.src = "./elementos-comida-y-botones/pescado.png";
       this.node.style.zIndex = 10;
       this.node.style.position = "absolute";
   

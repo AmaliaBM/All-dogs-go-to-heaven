@@ -13,7 +13,7 @@ class Nube {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/nuevanube.png";
+      this.node.src = "./elementos-comida-y-botones/nuevanube.png";
       this.node.style.position = "absolute";
   
       // === DIMENSIONES Y POSICIÓN INICIAL ===

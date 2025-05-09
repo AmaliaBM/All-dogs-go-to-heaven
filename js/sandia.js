@@ -10,7 +10,7 @@ class Sandia {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/sandia.png";
+      this.node.src = "./elementos-comida-y-botones/sandia.png";
       this.node.style.zIndex = 10;
       this.node.style.position = "absolute";
   

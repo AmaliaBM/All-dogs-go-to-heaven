@@ -10,7 +10,7 @@ class Zanahoria {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/zanahoria.png";
+      this.node.src = "./elementos-comida-y-botones/zanahoria.png";
       this.node.style.zIndex = 10;
       this.node.style.position = "absolute";
   

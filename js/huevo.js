@@ -10,7 +10,7 @@ class Huevo {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/huevo.png";
+      this.node.src = "./elementos-comida-y-botones/huevo.png";
       this.node.style.zIndex = 10;
       this.node.style.position = "absolute";
   

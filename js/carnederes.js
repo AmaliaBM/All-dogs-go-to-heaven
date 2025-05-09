@@ -10,7 +10,7 @@ class Carnederes {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/carnederes.png";
+      this.node.src = "./elementos-comida-y-botones/carnederes.png";
       this.node.style.zIndex = 10;
       this.node.style.position = "absolute";
   

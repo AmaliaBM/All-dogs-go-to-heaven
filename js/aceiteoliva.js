@@ -11,7 +11,7 @@ class AceiteOliva {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/aceiteoliva.png";
+      this.node.src = "./elementos-comida-y-botones/aceiteoliva.png";
       this.node.style.zIndex = 10;
       this.node.style.position = "absolute";
   

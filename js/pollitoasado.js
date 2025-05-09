@@ -13,7 +13,7 @@ class PollitoAsado {
   
       // === CREACIÓN DEL NODO DOM ===
       this.node = document.createElement("img");
-      this.node.src = "./images-sin-fondo/pollitoasado-8bit.png";
+      this.node.src = "./elementos-comida-y-botones/pollitoasado-8bit.png";
       this.node.style.position = "absolute";
   
       // === DIMENSIONES Y POSICIÓN INICIAL ===
