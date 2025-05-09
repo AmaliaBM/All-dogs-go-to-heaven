@@ -62,7 +62,8 @@ audio {
 }
 
 #start-btn {
-  background-color: rgba(0, 131, 255, 0.8);
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra suave para resaltar */
   color: white;
   padding: 20px;
   font-size: 20px;
