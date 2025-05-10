@@ -1,9 +1,24 @@
 /* === ESTILOS GENERALES === */
 body {
   margin: 0;
-  background-image: url("../fondos/fondo-abstracto-con-textura.jpg"); 
+  background-image: linear-gradient(rgba(17, 17, 17, 0.90), rgba(17, 17, 17, 0.90)), url("../fondos/8697741.jpg");
+  background-size: cover;
   overflow-x: hidden;
   font-family: sans-serif;
+}
+
+body::before {/* Creo el pseudo-elemento para añadir filtros de estilo en el fondo sin alterar el resto de elementos*/
+  content: ''; 
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../fondos/8697741.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(3px); 
+  z-index: -1; 
 }
 
 audio {
@@ -58,7 +73,7 @@ audio {
   border-radius: 2px;
   height: 600px;
   width: 628px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra suave para resaltar */
+  box-shadow: 0 4px 20px rgb(255, 255, 255); /* Sombra suave para resaltar */
 }
 
 #start-btn {
@@ -71,11 +86,11 @@ audio {
   margin-top: 0;
   border: none;
   cursor: pointer;
-  transition: background-color 0.4s ease;
+  transition: 0.4s ease;
 }
 
 #start-btn:hover {
-  background-color: rgba(0, 131, 255, 1); /* Azul más intenso al pasar el puntero */
+  background-color: rgba(0, 123, 255, 0.6); /* Azul más intenso al pasar el puntero */
 }
 
 
@@ -126,12 +141,14 @@ audio {
   border-width: 1px;
   border-style: solid;
   border-radius: 10px; 
-  border-color: #1e1e1e;
+  border-color: #e3e3e3;
+  background-color: rgba(rgba(0, 253, 255, 0.6));
   background-image: url("../fondos/nubes-fondo-40_.png");
+  background-color: #fdfafa;
   background-position: top;
   background-size: cover;
   touch-action: none;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra suave para resaltar */
+  box-shadow: 0 4px 15px rgb(255, 255, 255);
 }
 
 
@@ -147,14 +164,15 @@ audio {
 
 /* === BOTÓN DE PAUSA === */
 #pause-btn {
-  background-color: rgba(0, 35, 70, 0.8);;
+  background-color: rgba(74, 153, 232, 0.95);
+  box-shadow: 0 4px 15px rgb(255, 255, 255);
+  border-color: #e3e3e3;
   color: rgb(0, 0, 0);
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 8px;
   margin-top: 10px;
   cursor: pointer;
-  border: none;
 }
 
 #pause-btn:hover {
@@ -164,6 +182,7 @@ audio {
 /* === SCOREBOARD === */
 
 #score-board {
+  background-color: (0, 35, 70, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,15 +193,18 @@ audio {
   margin-bottom: 10px;
   font-size: 24px;
   font-weight: bold;
-  color: #131111;
+  color: #ffffff;
   border-radius: 73px;
   padding: 10px 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.48);
+  box-shadow: 0 4px 15px rgb(255, 255, 255);
   border: 3px solid #009fff57;
+  position: sticky;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
   width: auto;
   min-width: 349px;
   position: fixed; 
-  top: 20px; 
+  top: 10px; 
   left: 50%; 
   transform: translateX(-50%); 
   z-index: 1000; 
@@ -191,7 +213,7 @@ audio {
 #score-board h3 {
   margin: 0;
   font-size: 20px;
-  color: #35342d; 
+  color: #ffffff; 
 }
 
 #score,
@@ -200,6 +222,26 @@ audio {
   align-items: center;
   justify-content: center;
 }
+
+#game-container {
+  position: relative;
+  width: 800px;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+#score-board,
+#botonesOnOff {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+#score-board {
+  top: 0;
+}
+#botonesOnOff {
+  top: 50px;
+}
+
 
 /* === PANTALLA FINAL === */
 
@@ -220,7 +262,7 @@ audio {
 }
 
 #restart-btn {
-  background-color: rgba(0, 35, 70, 0.8);
+  background-color: rgba(0, 35, 70, 0.95);
   color: white;
   padding: 20px;
   font-size: 20px;
@@ -250,8 +292,12 @@ audio {
   z-index: 500; 
 }
 
+#game-over-screen {
+  background-color: rgba(199, 231, 242, 0.60); /* corregido */
+}
 
 #container-raking {
+  background-color: rgba(199, 231, 242, 1); /* corregido */
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); 
@@ -260,18 +306,3 @@ audio {
   max-width: 500px;
 }
 
-#container-raking h3 {
-  font-size: 2rem;
-  color: #005d02;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-
-#player-name-gameover, #max-score-gameover {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #333;
-  margin: 10px 0;
-}
-  
