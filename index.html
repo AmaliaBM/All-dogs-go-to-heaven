@@ -10,13 +10,12 @@
 <body>
 
   <!-- SCORE -->
-  <div id="score-board">
-    <h3>Health points:</h3>
+  <div id=" game-cointer">
+    <div id="score-board">
+    <h3>💚 Health points</h3>
     <span id="score">0</span>
     <h3 id="max-score" style="display: none;"><span></span></h3>
   </div>
-
-  <div id=" game-cointer">
   <!-- BOTONES ON/OFF DE MÚSICA -->
   <div id="botonesOnOff">
     <button id="soundOn-btn">
@@ -51,6 +50,7 @@
   </div>
   
   <!-- PANTALLA FINAL -->
+   <div id="gameover-container">
   <div id="game-over-screen" class="container" style="display: none;">
     <div id="container-end-background"></div>
     <div id="container-raking">
@@ -61,7 +61,7 @@
       <ol id="ranking-list"></ol>
       <button id="restart-btn">Go Again!🔄</button>
     </div>
-  </div>
+  </div></div>
 
   <!-- AUDIOS DEL JUEGO -->
   <audio id="musicajuego" src="./sonido-musica/moodmode_-_8_Bit_Retro_Game_Music.mp3"></audio>

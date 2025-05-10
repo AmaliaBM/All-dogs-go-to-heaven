@@ -499,7 +499,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function mostrarMensajeSalud(puntosGanados, x = window.innerWidth / 2, y = 100) {
     const mensaje = document.createElement("div");
-    mensaje.textContent = `+ ${puntosGanados} health points!!`;
+    mensaje.textContent = `+ ${puntosGanados} health points 💚`;
     mensaje.style.position = "absolute";
     mensaje.style.left = `${x}px`;
     mensaje.style.top = `${y}px`;

@@ -58,7 +58,7 @@ audio {
   font-weight: bold;
   box-shadow: 0 0 20px rgba(0,0,0,0.4);
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: 0.4s ease;
   z-index: 999;
 }
 
@@ -70,7 +70,7 @@ audio {
   background-repeat: no-repeat;
   background-position: center;
   border: 1px solid black;
-  border-radius: 2px;
+  border-radius: 10px;
   height: 600px;
   width: 628px;
   box-shadow: 0 4px 20px rgb(255, 255, 255); /* Sombra suave para resaltar */
@@ -91,6 +91,7 @@ audio {
 
 #start-btn:hover {
   background-color: rgba(0, 123, 255, 0.6); /* Azul más intenso al pasar el puntero */
+  box-shadow: 0 4px 15px rgb(255, 255, 255);
 }
 
 
@@ -177,6 +178,7 @@ audio {
 
 #pause-btn:hover {
   background-color: rgb(0, 87, 168); /* Azul más intenso al pasar el puntero */
+  box-shadow: 0 4px 15px rgb(255, 255, 255);
 }
 
 /* === SCOREBOARD === */
@@ -200,11 +202,10 @@ audio {
   border: 3px solid #009fff57;
   position: sticky;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-
-  width: auto;
+  top: 50px;
+  gap: 10px;
   min-width: 349px;
   position: fixed; 
-  top: 10px; 
   left: 50%; 
   transform: translateX(-50%); 
   z-index: 1000; 
@@ -228,6 +229,8 @@ audio {
   width: 800px;
   margin: 0 auto;
   padding-top: 30px;
+  display: flex;
+  gap: 10px;
 }
 #score-board,
 #botonesOnOff {
@@ -235,15 +238,24 @@ audio {
   left: 50%;
   transform: translateX(-50%);
 }
-#score-board {
-  top: 0;
-}
+
 #botonesOnOff {
-  top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  top: 120px;
+
 }
 
 
 /* === PANTALLA FINAL === */
+
+#gameover-container{
+  background-image:url("../fondos/fondo-abstracto-con-textura.jpg");
+   background-color: rgba(199, 231, 242, 1);
+   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
 
 
 #container-end-background {
@@ -293,7 +305,10 @@ audio {
 }
 
 #game-over-screen {
-  background-color: rgba(199, 231, 242, 0.60); /* corregido */
+  background-color: rgba(199, 231, 242, 1); /* corregido */
+  box-shadow: 0 4px 15px rgb(255, 255, 255);
+  border-radius: 10px;
+
 }
 
 #container-raking {
@@ -306,3 +321,6 @@ audio {
   max-width: 500px;
 }
 
+#containerboton p {
+  font-weight: bold;
+}
